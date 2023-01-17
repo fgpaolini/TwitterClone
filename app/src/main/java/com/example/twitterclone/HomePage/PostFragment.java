@@ -68,12 +68,8 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         ivProfile = v.findViewById(R.id.imagePostProfile);
         ivPost1 = v.findViewById(R.id.imagePost1);
-        ivPost2 = v.findViewById(R.id.imagePost2);
-        ivPost3 = v.findViewById(R.id.imagePost3);
         ivProfile.setOnClickListener(this);
         ivPost1.setOnClickListener(this);
-        ivPost2.setOnClickListener(this);
-        ivPost3.setOnClickListener(this);
 
         etPost = v.findViewById(R.id.etPostFill);
         btPost = v.findViewById(R.id.btPost);
@@ -116,14 +112,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                     bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imagenUri);
                                     ivPost1.setImageBitmap(bitmap);
                                     break;
-                                case 2:
-                                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imagenUri);
-                                    ivPost2.setImageBitmap(bitmap);
-                                    break;
-                                case 3:
-                                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imagenUri);
-                                    ivPost3.setImageBitmap(bitmap);
-                                    break;
                             }
                         }
                         else{
@@ -136,14 +124,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                 case 1:
                                     bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imagenUri);
                                     ivPost1.setImageBitmap(bitmap);
-                                    break;
-                                case 2:
-                                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imagenUri);
-                                    ivPost2.setImageBitmap(bitmap);
-                                    break;
-                                case 3:
-                                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imagenUri);
-                                    ivPost3.setImageBitmap(bitmap);
                                     break;
                             }
                         }
@@ -231,14 +211,6 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.imagePost1:
                 select_post = 1;
-                activityResultLauncher.launch(i);
-                break;
-            case R.id.imagePost2:
-                select_post = 2;
-                activityResultLauncher.launch(i);
-                break;
-            case R.id.imagePost3:
-                select_post = 3;
                 activityResultLauncher.launch(i);
                 break;
         }
