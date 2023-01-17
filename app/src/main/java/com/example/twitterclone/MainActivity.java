@@ -1,5 +1,6 @@
 package com.example.twitterclone;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,8 +13,11 @@ import com.example.twitterclone.HomePage.PostFragment;
 import com.example.twitterclone.HomePage.ProfileFragment;
 import com.example.twitterclone.ModelUser.ModelUser;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         USER_UID = extras.getString("UIDusuario");
 
+        //Rellena el usuario logeado
+        fill_logged_user();
+
         //Creacion de campos para cada fragmento
         //Haber incluido en Graddle(app) viewBiding
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -57,6 +64,33 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             return true;
+        });
+    }
+
+    public void fill_logged_user() {
+        LOGGED_USER = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", "NO_UID", "NO_URL");
+        MDATABASE.child("User").child(USER_UID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    if (data.getKey().equals("name")) {
+                        LOGGED_USER.setName(data.getValue().toString());
+                    } else if (data.getKey().equals("email")) {
+                        LOGGED_USER.setMail(data.getValue().toString());
+                    } else if (data.getKey().equals("pic")) {
+                        LOGGED_USER.setURL_image(data.getValue().toString());
+                    } else if (data.getKey().equals("user")) {
+                        LOGGED_USER.setUser(data.getValue().toString());
+                    }
+                }
+                LOGGED_USER.setUID(USER_UID);
+                System.out.println(LOGGED_USER);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 
