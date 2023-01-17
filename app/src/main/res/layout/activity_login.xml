@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/twitterBlue"
@@ -57,7 +58,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPassLogin"
+                android:id="@+id/etPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
@@ -66,7 +67,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -87,7 +88,7 @@
                 android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/btTextRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
