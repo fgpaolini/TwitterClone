@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp">
 
         <Button
             android:id="@+id/cancelBtn"
@@ -30,7 +31,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btPost"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Tweet" />
@@ -46,7 +47,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/tweetProfilePic"
+            android:id="@+id/imagePostProfile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
@@ -63,7 +64,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etPostFill"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
@@ -73,8 +74,37 @@
         android:inputType="textImeMultiLine"
         android:paddingLeft="40dp"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="10dp">
+
+        <ImageView
+            android:id="@+id/imagePost1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_image" />
+
+        <ImageView
+            android:id="@+id/imagePost2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_image" />
+
+        <ImageView
+            android:id="@+id/imagePost3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_no_image" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

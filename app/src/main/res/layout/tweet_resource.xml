@@ -38,7 +38,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/tweetProfilePic"
+                        android:id="@+id/imagePostProfile"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="10dp"
