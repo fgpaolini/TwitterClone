@@ -42,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -187,9 +188,10 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(LocalDateTime.now());
                     MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));
                     int number_image = 0;
-                    if(used_uri != null){
+                    if(used_uri.size() != 0){
                         for(Uri data_image: used_uri){
                             number_image++;
                             String number_string_image =  Integer.toString(number_image);
@@ -204,6 +206,10 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                 }
                             }));
                         }
+                    }
+                    else{
+                        loading_dialog.dismiss();
+                        Toast.makeText(PostFragment.this.getContext(), "Posteado!", Toast.LENGTH_SHORT).show();
                     }
 
 
