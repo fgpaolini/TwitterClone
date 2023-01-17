@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
+import static com.example.twitterclone.MainActivity.MTSTORAGE;
 import static com.example.twitterclone.MainActivity.USER_UID;
 
 import android.app.AlertDialog;
@@ -38,6 +39,7 @@ import com.example.twitterclone.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,6 +58,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Uri> used_uri = new ArrayList<>();
     private int select_post = 0;
     private int post_count;
+    private boolean product_save;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,7 +93,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
+        product_save = false;
         //Cargador de imagenes
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -180,11 +183,28 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     //Mostrar el layout
                     loading_dialog.show();
 
-                    MDATABASE.child("Posts").child("Post"+ post_count).child(USER_UID).setValue(USER_UID);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child(USER_UID).setValue(USER_UID);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child(USER_UID).setValue(USER_UID);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child(USER_UID).setValue(USER_UID);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child(USER_UID).setValue(USER_UID);
+                    post_count++;
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
+                    MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));
+                    int number_image = 0;
+                    if(used_uri != null){
+                        for(Uri data_image: used_uri){
+                            number_image++;
+                            String number_string_image =  Integer.toString(number_image);
+                            StorageReference ubicationImagen = MTSTORAGE.child("Posts").child("Post"+Integer.toString(post_count)).child("Image"+number_string_image+".png");
+                            ubicationImagen.putFile(data_image).addOnSuccessListener(taskSnapshot -> ubicationImagen.getDownloadUrl().addOnCompleteListener(task2 -> {
+                                Uri imageURL = task2.getResult();
+                                MDATABASE.child("Posts").child("Post"+Integer.toString(post_count)).child("Image"+number_string_image).setValue(imageURL.toString());
+                                if(!product_save){
+                                    product_save = true;
+                                    loading_dialog.dismiss();
+                                    Toast.makeText(PostFragment.this.getContext(), "Posteado!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
+                        }
+                    }
 
 
                 }
