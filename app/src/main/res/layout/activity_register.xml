@@ -12,10 +12,12 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="128dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/twitter_clone_icon"
         tools:srcCompat="@drawable/twitter_clone_icon" />
 
     <LinearLayout
