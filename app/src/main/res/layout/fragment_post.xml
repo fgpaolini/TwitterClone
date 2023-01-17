@@ -90,7 +90,7 @@
 
         <ImageView
             android:id="@+id/imagePost1"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_no_image" />
 
@@ -98,13 +98,15 @@
             android:id="@+id/imagePost2"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_image" />
+            android:src="@drawable/ic_no_image"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/imagePost3"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_image" />
+            android:src="@drawable/ic_no_image"
+            android:visibility="gone" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
