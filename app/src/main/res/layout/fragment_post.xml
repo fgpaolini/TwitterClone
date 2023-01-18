@@ -71,6 +71,8 @@
         android:background="@color/white"
         android:ems="10"
         android:gravity="start"
+        android:ellipsize="end"
+        android:maxLines="10"
         android:hint="¿Que quieres publicar?"
         android:inputType="textImeMultiLine"
         android:paddingLeft="40dp"
@@ -85,29 +87,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp">
 
         <ImageView
             android:id="@+id/imagePost1"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_no_image" />
-
-        <ImageView
-            android:id="@+id/imagePost2"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_image"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/imagePost3"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_image"
-            android:visibility="gone" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
