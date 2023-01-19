@@ -36,11 +36,13 @@
   <androidx.fragment.app.FragmentContainerView
       android:id="@+id/fragmentContainerView2"
       android:name="com.example.twitterclone.HomePage.HomeFragment"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="match_parent"
       app:defaultNavHost="true"
       app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHeight="match_constraint"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/linearLayoutBar"
       app:navGraph="@navigation/bottom_nav"
       tools:layout="@layout/fragment_home" />
