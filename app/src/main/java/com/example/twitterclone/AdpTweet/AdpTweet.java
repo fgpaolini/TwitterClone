@@ -87,15 +87,21 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 ivImage.setVisibility(itemView.GONE);
             }
 
-            //Precarga del boton del like
-            for(String user: tweet.getUsers_liked()){
-                System.out.println(user);
-                if(user.equals(LOGGED_USER.getUID())){
-                    likeButton.setChecked(true);
-                    break;
+            if(tweet.getUsers_liked().size() == 0){
+                likeButton.setText("");
+            } else{
+                //Precarga del boton del like
+                for(String user: tweet.getUsers_liked()){
+                    if(user.equals(LOGGED_USER.getUID())){
+                        likeButton.setChecked(true);
+                        break;
+                    }
+                    else{
+                        likeButton.setChecked(false);
+                    }
                 }
+                likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
             }
-            likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
 
 
             //Acciones en caso de ser clicado el like
@@ -123,7 +129,11 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                         MDATABASE.child("Posts").child(tweet.getId_post()).child("liked_users").child(LOGGED_USER.getUID()).setValue(true);
 
                     }
-                    likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
+                    if(tweet.getUsers_liked().size() == 0){
+                        likeButton.setText("");
+                    } else{
+                        likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
+                    }
                 }
             });
 
