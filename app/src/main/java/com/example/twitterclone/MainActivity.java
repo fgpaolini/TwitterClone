@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fill_logged_user() {
-        LOGGED_USER = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", "NO_UID", "NO_URL");
+        LOGGED_USER = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", "NO_UID", "NO_URL","NO_DESCRIPTION");
         MDATABASE.child("User").child(USER_UID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
                     } else if (data.getKey().equals("pic")) {
                         LOGGED_USER.setURL_image(data.getValue().toString());
                     } else if (data.getKey().equals("user")) {
+                        LOGGED_USER.setUser(data.getValue().toString());
+                    } else if (data.getKey().equals("description")) {
                         LOGGED_USER.setUser(data.getValue().toString());
                     }
                 }

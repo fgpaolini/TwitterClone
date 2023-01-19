@@ -7,13 +7,15 @@ public class ModelUser {
     private String mail;
     private String UID;
     private String URL_image;
+    private String user_description;
 
-    public ModelUser(String name, String user, String mail, String UID, String URL_image) {
+    public ModelUser(String name, String user, String mail, String UID, String URL_image, String user_description) {
         this.name = name;
         this.user = user;
         this.mail = mail;
         this.UID = UID;
         this.URL_image = URL_image;
+        this.user_description = user_description;
     }
 
     public String getName() {
@@ -54,6 +56,14 @@ public class ModelUser {
 
     public void setURL_image(String URL_image) {
         this.URL_image = URL_image;
+    }
+
+    public String getUser_description() {
+        return user_description;
+    }
+
+    public void setUser_description(String user_description) {
+        this.user_description = user_description;
     }
 
     @Override

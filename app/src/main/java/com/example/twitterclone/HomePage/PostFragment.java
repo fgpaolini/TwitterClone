@@ -170,6 +170,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(LocalDateTime.now());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
                     MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));
                     int number_image = 0;
                     if(used_uri.size() != 0){

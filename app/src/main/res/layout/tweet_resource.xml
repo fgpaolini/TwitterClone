@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <androidx.cardview.widget.CardView
+ <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="3dp"
@@ -17,17 +14,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/little_white"
-            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".8"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
@@ -105,7 +99,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:scaleType="centerCrop"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -113,34 +107,34 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:weightSum="3">
 
                     <ImageView
                         android:id="@+id/commentBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
+                        android:layout_height="15dp"
+                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         app:srcCompat="@drawable/twitter_reply_outline" />
 
                     <ImageView
                         android:id="@+id/rtBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
+                        android:layout_height="15dp"
+                        android:layout_weight="1"
                         app:srcCompat="@drawable/twitter_retweet" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/likeBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".3"
-                        app:srcCompat="@drawable/twitter_like_outline" />
+                        android:layout_height="15dp"
+                        android:layout_weight="1"
+                        android:button="@drawable/like_checkbox"
+                        android:gravity="center"
+                        android:text="2" />
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>

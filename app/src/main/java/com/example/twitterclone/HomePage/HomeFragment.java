@@ -45,11 +45,13 @@ public class HomeFragment extends Fragment {
 
                     if(!post.getKey().equals("postCount")){
 
+                        String id_post = "";
                         String user_url_profile = "";
                         String user_poster = "";
                         String user_uid = "";
                         String content_post = "";
                         String image_url = "";
+                        ArrayList<String> users_liked = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
@@ -68,10 +70,20 @@ public class HomeFragment extends Fragment {
                             else if (data.getKey().equals("pic")){
                                 user_url_profile = data.getValue().toString();
                             }
+                            else if (data.getKey().equals("liked_users")){
+                                for(DataSnapshot user_liked: data.getChildren()){
+                                    String checked_is_liked = user_liked.getValue().toString();
+                                    if(checked_is_liked.equals("true")){
+                                        users_liked.add(user_liked.getKey());
+                                    }
+                                }
+                            }
+
 
                         }
 
-                        list_posts.add(new TweetModel(user_poster, user_uid, content_post, image_url, user_url_profile));
+                        id_post = post.getKey();
+                        list_posts.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked));
 
                     }
 
@@ -94,7 +106,7 @@ public class HomeFragment extends Fragment {
     public void createRecycleProductsA(@NonNull View v, ArrayList<TweetModel> list_to_show){
         AdpTweet adpShop_adaptor_2 = new AdpTweet(v.getContext(), list_to_show);
         RecyclerView recyclerViewPopular = v.findViewById(R.id.recyclePosts);
-        recyclerViewPopular.setLayoutManager(new LinearLayoutManager(v.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerViewPopular.setLayoutManager(new GridLayoutManager(v.getContext(),1));
         recyclerViewPopular.setAdapter(adpShop_adaptor_2);
     }
 }
