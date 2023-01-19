@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.example.twitterclone.databinding.ActivityMainBinding;
 import com.example.twitterclone.HomePage.HomeFragment;
 import com.example.twitterclone.HomePage.PostFragment;
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     public static DatabaseReference MDATABASE;
     public static String USER_UID;
     public static ModelUser LOGGED_USER;
+
+    private ImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 LOGGED_USER.setUID(USER_UID);
-                System.out.println(LOGGED_USER);
+                profile = findViewById(R.id.mainProfileActivity);
+                Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
+                Glide.with(MainActivity.this).load(String.valueOf(profile_photo)).into(profile);
             }
 
             @Override

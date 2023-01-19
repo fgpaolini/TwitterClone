@@ -87,6 +87,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 ivImage.setVisibility(itemView.GONE);
             }
 
+
             if(tweet.getUsers_liked().size() == 0){
                 likeButton.setText("");
             } else{
