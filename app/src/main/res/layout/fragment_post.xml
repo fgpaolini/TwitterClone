@@ -52,7 +52,8 @@
             android:layout_height="40dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
             app:strokeColor="@color/twitterBlue"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/textView"
