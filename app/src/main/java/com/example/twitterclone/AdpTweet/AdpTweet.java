@@ -87,20 +87,16 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             Glide.with(itemView).load(String.valueOf(profile_photo)).into(ivProfile);
 
             //Numero posts
-            if(tweet.getNumber_comments() == 0){
-                tvCountComment.setVisibility(View.GONE);
-            }
-            else{
+            if(tweet.getNumber_comments() != 0){
+                tvCountComment.setVisibility(itemView.VISIBLE);
                 tvCountComment.setText(Integer.toString(tweet.getNumber_comments()));
             }
 
             //Imagen
             if(!tweet.getImage_url().equals("")){
+                ivImage.setVisibility(itemView.VISIBLE);
                 Uri post_photo = Uri.parse(tweet.getImage_url());
                 Glide.with(itemView).load(String.valueOf(post_photo)).into(ivImage);
-            }
-            else{
-                ivImage.setVisibility(itemView.GONE);
             }
             if(tweet.getUsers_liked().size() == 0){
                 likeButton.setText("");
