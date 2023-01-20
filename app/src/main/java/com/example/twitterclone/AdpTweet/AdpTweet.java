@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.twitterclone.HomePage.ActivityUserInfo;
 import com.example.twitterclone.HomePage.CommentActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
@@ -86,8 +87,10 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvName.setText(tweet.getUser_poster());
             tvUser.setText(tweet.getUser_poster());
             tvTweet.setText(tweet.getContent_post());
+
+            //Volver a poner el foto
             Uri profile_photo = Uri.parse(tweet.getUser_url_profile());
-            Glide.with(itemView).load(String.valueOf(profile_photo)).into(ivProfile);
+            Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
 
             //Numero posts
             if(tweet.getNumber_comments() != 0){
