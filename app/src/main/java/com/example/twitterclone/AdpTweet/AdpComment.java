@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.twitterclone.HomePage.ActivityUserInfo;
 import com.example.twitterclone.ModelUser.CommentModel;
 import com.example.twitterclone.ModelUser.TweetModel;
@@ -72,7 +73,7 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
             tvName.setText(comments.getUser_comment());
             tvComment.setText(comments.getUser_comment());
             Uri profile_photo = Uri.parse(comments.getUser_photo_url());
-            Glide.with(itemView).load(String.valueOf(profile_photo)).into(ivProfile);
+            Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
 
             if(comments.getLiked_users_comment().size() == 0){
                 likeButton.setText("");

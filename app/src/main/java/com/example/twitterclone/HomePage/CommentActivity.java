@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.twitterclone.AdpTweet.AdpComment;
 import com.example.twitterclone.AdpTweet.AdpTweet;
 import com.example.twitterclone.ModelUser.CommentModel;
@@ -120,7 +121,7 @@ public class CommentActivity extends AppCompatActivity {
                         tvUser.setText(main_tweet.getUser_poster());
                         tvTweet.setText(main_tweet.getContent_post());
                         Uri profile_photo = Uri.parse(main_tweet.getUser_url_profile());
-                        Glide.with(CommentActivity.this).load(String.valueOf(profile_photo)).into(ivProfile);
+                        Glide.with(CommentActivity.this).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
                         if(!main_tweet.getImage_url().equals("")){
                             Uri post_photo = Uri.parse(image_url);
                             Glide.with(CommentActivity.this).load(String.valueOf(post_photo)).into(ivImage);
