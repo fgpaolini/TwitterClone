@@ -42,6 +42,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -54,6 +55,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri imagenUri;
 
+    private DateTimeFormatter FOMATTER;
     private boolean[] position_used = new boolean[3];
     private ArrayList<Uri> used_uri = new ArrayList<>();
     private int select_post = 0;
@@ -72,6 +74,10 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         etPost = v.findViewById(R.id.etPostFill);
         btPost = v.findViewById(R.id.btPost);
+
+
+        FOMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a");
+
 
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -141,6 +147,9 @@ public class PostFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 String post_text = etPost.getText().toString();
 
+                //Local date time instance
+                LocalDateTime localDateTime = LocalDateTime.now();
+
                 if(post_text.isEmpty()){
                     Toast.makeText(PostFragment.this.getContext(), "No puedes dejar vacio el post", Toast.LENGTH_SHORT).show();
                     etPost.requestFocus();
@@ -167,7 +176,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(LocalDateTime.now());
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(localDateTime);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
                     MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));

@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment{
 
                             }
 
+
                             else if (data.getKey().equals("name")) {
                                 user_name = data.getValue().toString();
                             }
