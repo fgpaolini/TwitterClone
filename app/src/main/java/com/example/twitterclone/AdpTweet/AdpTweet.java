@@ -42,6 +42,8 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);;
         this.list_post = list_post;
+
+
     }
 
     @NonNull
@@ -84,7 +86,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
         //Pondra la informacion al objeto
         public void bindData(@NonNull TweetModel tweet){
             tvName.setText(tweet.getUser_poster());
-            tvUser.setText(tweet.getUser_poster());
+            tvUser.setText("@" + tweet.getUser_poster());
             tvTweet.setText(tweet.getContent_post());
             Uri profile_photo = Uri.parse(tweet.getUser_url_profile());
             Glide.with(itemView).load(String.valueOf(profile_photo)).into(ivProfile);

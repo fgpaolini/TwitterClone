@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment{
                         String user_url_profile = "";
                         String user_poster = "";
                         String user_uid = "";
+                        String user_name = "";
                         String content_post = "";
                         String image_url = "";
                         int number_comments = 0;
@@ -68,6 +69,11 @@ public class HomeFragment extends Fragment{
 
                             if (data.getKey().equals("User")) {
                                 user_poster = data.getValue().toString();
+
+                            }
+
+                            else if (data.getKey().equals("name")) {
+                                user_name = data.getValue().toString();
                             }
                             else if (data.getKey().equals("comments")) {
                                 for(DataSnapshot counting: data.getChildren()){
@@ -96,12 +102,10 @@ public class HomeFragment extends Fragment{
                                     }
                                 }
                             }
-
-
                         }
 
                         id_post = post.getKey();
-                        list_posts.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
+                        list_posts.add(new TweetModel(id_post, user_poster, user_name, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
 
                     }
 

@@ -114,6 +114,7 @@ public class ActivityUserInfo extends AppCompatActivity {
                         String id_post = "";
                         String user_url_profile = "";
                         String user_poster = "";
+                        String user_name = "";
                         String user_uid = "";
                         String content_post = "";
                         String image_url = "";
@@ -125,6 +126,11 @@ public class ActivityUserInfo extends AppCompatActivity {
                             if (data.getKey().equals("User")) {
                                 user_poster = data.getValue().toString();
                             }
+
+                            else if (data.getKey().equals("name")) {
+                                user_name = data.getValue().toString();
+                            }
+
                             else if (data.getKey().equals("comments")) {
                                 for(DataSnapshot counting: data.getChildren()){
                                     if(!counting.getKey().equals("count_comments")){
@@ -157,7 +163,7 @@ public class ActivityUserInfo extends AppCompatActivity {
                         }
                         if(user_uid.equals(user.getUID())){
                             id_post = post.getKey();
-                            users_tweets.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
+                            users_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
                         }
                     }
 
