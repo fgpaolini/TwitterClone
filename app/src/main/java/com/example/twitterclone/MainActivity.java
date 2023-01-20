@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     public static DatabaseReference MDATABASE;
     public static String USER_UID;
     public static ModelUser LOGGED_USER;
-
     private ImageView profile;
 
     @Override
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (data.getKey().equals("user")) {
                         LOGGED_USER.setUser(data.getValue().toString());
                     } else if (data.getKey().equals("description")) {
-                        LOGGED_USER.setUser(data.getValue().toString());
+                        LOGGED_USER.setUser_description(data.getValue().toString());
                     }
                 }
                 LOGGED_USER.setUID(USER_UID);
