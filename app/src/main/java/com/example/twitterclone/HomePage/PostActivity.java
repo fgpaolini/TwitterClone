@@ -1,12 +1,16 @@
 package com.example.twitterclone.HomePage;
 
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
-
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 import static com.example.twitterclone.MainActivity.MTSTORAGE;
 import static com.example.twitterclone.MainActivity.USER_UID;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -16,18 +20,9 @@ import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,12 +39,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-
-public class PostFragment extends Fragment implements View.OnClickListener {
+public class PostActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView ivProfile, ivPost1;
     private EditText etPost;
-    private Button btPost;
+    private Button btPost, btCancel;
 
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Uri imagenUri;
@@ -60,25 +54,27 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     private int post_count;
     private boolean post_save;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_post, container, false);
 
-        ivProfile = v.findViewById(R.id.imagePostProfile);
-        ivPost1 = v.findViewById(R.id.imagePost1);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post);
+
+        ivProfile = findViewById(R.id.imagePostProfile);
+        ivPost1 = findViewById(R.id.imagePost1);
         ivProfile.setOnClickListener(this);
         ivPost1.setOnClickListener(this);
 
-        etPost = v.findViewById(R.id.etPostFill);
-        btPost = v.findViewById(R.id.btPost);
+        etPost = findViewById(R.id.etPostFill);
+        btPost = findViewById(R.id.btPost);
+        btCancel = findViewById(R.id.cancelBtn);
 
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data : snapshot.getChildren()){
                     if(data.getKey().equals("postCount")){
-                            post_count = Integer.parseInt(data.getValue().toString());
+                        post_count = Integer.parseInt(data.getValue().toString());
                     }
                 }
             }
@@ -98,7 +94,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     //Obtiene datos de imagen
                     Intent data = result.getData();
                     imagenUri = data.getData();
-                    ContentResolver contentResolver = getActivity().getContentResolver();
+                    ContentResolver contentResolver = PostActivity.this.getContentResolver();
                     try {
                         //Dependiendo de que version sea, ejecutara un codigo u otro
                         Bitmap bitmap;
@@ -131,7 +127,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     }
                 }
                 else if(result.getResultCode() == RESULT_CANCELED){
-                    Toast.makeText(PostFragment.this.getContext(),"Cancelado...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this,"Cancelado...",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -142,14 +138,14 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                 String post_text = etPost.getText().toString();
 
                 if(post_text.isEmpty()){
-                    Toast.makeText(PostFragment.this.getContext(), "No puedes dejar vacio el post", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "No puedes dejar vacio el post", Toast.LENGTH_SHORT).show();
                     etPost.requestFocus();
                     return;
                 }
                 else{
                     //Preparar la pantalla de carga
                     AlertDialog loading_dialog;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PostFragment.this.getContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PostActivity.this);
                     builder.setCancelable(false);
 
                     //Preparar para agregar el layout
@@ -170,6 +166,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(LocalDateTime.now());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("comments").child("count_comments").setValue(0);
                     MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));
                     int number_image = 0;
                     if(used_uri.size() != 0){
@@ -183,14 +180,16 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                 if(!post_save){
                                     post_save = true;
                                     loading_dialog.dismiss();
-                                    Toast.makeText(PostFragment.this.getContext(), "Posteado!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
+                                    finish();
                                 }
                             }));
                         }
                     }
                     else{
                         loading_dialog.dismiss();
-                        Toast.makeText(PostFragment.this.getContext(), "Posteado!", Toast.LENGTH_SHORT).show();
+                        finish();
+                        Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -198,11 +197,16 @@ public class PostFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         //Rellenar el perfil
         Uri product_image = Uri.parse(LOGGED_USER.getURL_image());
-        Glide.with(v).load(String.valueOf(product_image)).into(ivProfile);
-
-        return v;
+        Glide.with(PostActivity.this).load(String.valueOf(product_image)).into(ivProfile);
     }
 
     @Override

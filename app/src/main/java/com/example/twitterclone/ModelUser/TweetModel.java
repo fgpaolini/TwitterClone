@@ -11,8 +11,9 @@ public class TweetModel {
     private String content_post;
     private String image_url;
     private ArrayList<String> users_liked;
+    private int number_comments;
 
-    public TweetModel(String id_post, String user_poster, String user_uid, String content_post, String image_url, String user_url_profile, ArrayList<String> users_liked) {
+    public TweetModel(String id_post, String user_poster, String user_uid, String content_post, String image_url, String user_url_profile, ArrayList<String> users_liked, int number_comments) {
         this.id_post = id_post;
         this.user_poster = user_poster;
         this.user_uid = user_uid;
@@ -20,6 +21,15 @@ public class TweetModel {
         this.image_url = image_url;
         this.user_url_profile = user_url_profile;
         this.users_liked = users_liked;
+        this.number_comments = number_comments;
+    }
+
+    public int getNumber_comments() {
+        return number_comments;
+    }
+
+    public void setNumber_comments(int number_comments) {
+        this.number_comments = number_comments;
     }
 
     public String getId_post() {

@@ -70,9 +70,9 @@ public class ProfileFragment extends Fragment {
 
         Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
         Glide.with(ProfileFragment.this).load(String.valueOf(profile_photo)).into(ivPhotoUser);
-        etName.setText(LOGGED_USER.getName());
-        etUser.setText(LOGGED_USER.getUser());
-        etDesctiption.setText(LOGGED_USER.getUser_description());
+        etName.setText("Nombre: " + LOGGED_USER.getName());
+        etUser.setText("Usuario: " + LOGGED_USER.getUser());
+        etDesctiption.setText("Descripcion: " + LOGGED_USER.getUser_description());
 
         //Necesario para busqueda de imagenes
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -136,12 +136,20 @@ public class ProfileFragment extends Fragment {
                         String user_uid = "";
                         String content_post = "";
                         String image_url = "";
+                        int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
                             if (data.getKey().equals("User")) {
                                 user_poster = data.getValue().toString();
+                            }
+                            else if (data.getKey().equals("comments")) {
+                                for(DataSnapshot counting: data.getChildren()){
+                                    if(!counting.getKey().equals("count_comments")){
+                                        number_comments++;
+                                    }
+                                }
                             }
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
@@ -168,7 +176,7 @@ public class ProfileFragment extends Fragment {
                         }
                         if(user_uid.equals(LOGGED_USER.getUID())){
                             id_post = post.getKey();
-                            my_tweets.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked));
+                            my_tweets.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
                         }
                     }
 
