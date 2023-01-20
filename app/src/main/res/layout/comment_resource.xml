@@ -44,40 +44,27 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/tweet_post_name"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Fernando" />
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/textView4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginRight="5dp"
+                            android:text="·" />
 
-                            <TextView
-                                android:id="@+id/tweet_post_user"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:text="&quot;@PaoliniFerg&quot;" />
+                        <TextView
+                            android:id="@+id/tvTweetTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1s" />
 
-                            <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="5dp"
-                                android:text="·" />
-
-                            <TextView
-                                android:id="@+id/tvTweetTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1s" />
-
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -92,51 +79,17 @@
                     android:paddingLeft="20dp"
                     android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat ma." />
 
-                <ImageView
-                    android:id="@+id/tweet_post_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:scaleType="centerCrop"
-                    android:visibility="visible" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:orientation="horizontal"
-                    android:weightSum="4">
-
-                    <ImageView
-                        android:id="@+id/commentBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="15dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/twitter_reply_outline" />
-                    <TextView
-                        android:id="@+id/textCountComments"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp"
-                        android:layout_weight="1"
-                        android:text="1">
-                    </TextView>
-
-                    <ImageView
-                        android:id="@+id/rtBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="15dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/twitter_retweet" />
+                    android:orientation="horizontal">
 
                     <CheckBox
                         android:id="@+id/likeBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="15dp"
-                        android:layout_weight="1"
                         android:button="@drawable/like_checkbox"
                         android:gravity="center"
                         android:text="2" />

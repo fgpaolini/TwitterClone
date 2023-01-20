@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot post: snapshot.getChildren()){
-
                     if(!post.getKey().equals("postCount")){
 
                         String id_post = "";
@@ -62,12 +61,20 @@ public class HomeFragment extends Fragment{
                         String user_uid = "";
                         String content_post = "";
                         String image_url = "";
+                        int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
                             if (data.getKey().equals("User")) {
                                 user_poster = data.getValue().toString();
+                            }
+                            else if (data.getKey().equals("comments")) {
+                                for(DataSnapshot counting: data.getChildren()){
+                                    if(!counting.getKey().equals("count_comments")){
+                                        number_comments++;
+                                    }
+                                }
                             }
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
@@ -94,7 +101,7 @@ public class HomeFragment extends Fragment{
                         }
 
                         id_post = post.getKey();
-                        list_posts.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked));
+                        list_posts.add(new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
 
                     }
 

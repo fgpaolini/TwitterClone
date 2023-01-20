@@ -3,7 +3,9 @@ package com.example.twitterclone.AdpTweet;
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.twitterclone.HomePage.ActivityUserInfo;
+import com.example.twitterclone.HomePage.CommentActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
 import com.google.firebase.database.DataSnapshot;
@@ -57,8 +61,8 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvUser, tvTweet;
-        ImageView ivProfile,ivImage;
+        TextView tvName, tvUser, tvTweet, tvCountComment;
+        ImageView ivProfile,ivImage,commentButton;
         CheckBox likeButton;
 
         //Recogera componentes del layout
@@ -70,6 +74,8 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             ivProfile = itemView.findViewById(R.id.post_profile_user);
             ivImage = itemView.findViewById(R.id.tweet_post_image);
             likeButton = itemView.findViewById(R.id.likeBtn);
+            commentButton = itemView.findViewById(R.id.commentBtn);
+            tvCountComment = itemView.findViewById(R.id.textCountComments);
         }
 
         //Pondra la informacion al objeto
@@ -79,6 +85,16 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvTweet.setText(tweet.getContent_post());
             Uri profile_photo = Uri.parse(tweet.getUser_url_profile());
             Glide.with(itemView).load(String.valueOf(profile_photo)).into(ivProfile);
+
+            //Numero posts
+            if(tweet.getNumber_comments() == 0){
+                tvCountComment.setVisibility(View.GONE);
+            }
+            else{
+                tvCountComment.setText(Integer.toString(tweet.getNumber_comments()));
+            }
+
+            //Imagen
             if(!tweet.getImage_url().equals("")){
                 Uri post_photo = Uri.parse(tweet.getImage_url());
                 Glide.with(itemView).load(String.valueOf(post_photo)).into(ivImage);
@@ -86,8 +102,6 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             else{
                 ivImage.setVisibility(itemView.GONE);
             }
-
-
             if(tweet.getUsers_liked().size() == 0){
                 likeButton.setText("");
             } else{
@@ -103,8 +117,6 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 }
                 likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
             }
-
-
             //Acciones en caso de ser clicado el like
             likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,6 +150,24 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 }
             });
 
+            //Acciones en caso de click en el perfil
+            ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(itemView.getContext(), ActivityUserInfo.class);
+                    i.putExtra("user_UID", tweet.getUser_uid());
+                    itemView.getContext().startActivity(i);
+                }
+            });
+
+            commentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(itemView.getContext(), CommentActivity.class);
+                    i.putExtra("post_id", tweet.getId_post());
+                    itemView.getContext().startActivity(i);
+                }
+            });
         }
     }
 }
