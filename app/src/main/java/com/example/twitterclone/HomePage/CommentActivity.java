@@ -40,6 +40,7 @@ public class CommentActivity extends AppCompatActivity {
     private Button btCommentar, btVolver;
     private EditText etTextoCommentar;
 
+    private TweetModel main_tweet;
     private int number_comments;
 
     @Override
@@ -59,6 +60,7 @@ public class CommentActivity extends AppCompatActivity {
         btCommentar = findViewById(R.id.btCommentarEnviar);
         etTextoCommentar = findViewById(R.id.etCommentar);
         btVolver = findViewById(R.id.btCancel);
+        likeButton = findViewById(R.id.likeBtn);
 
         list_comments = new ArrayList<>();
 
@@ -105,21 +107,38 @@ public class CommentActivity extends AppCompatActivity {
                                 }
                             }
                         }
+
+                        main_tweet = new TweetModel(id_post, user_poster, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments);
+
                         //Post pricipal a comentar rellenar
-                        tvName.setText(user_poster);
-                        tvUser.setText(user_poster);
-                        tvTweet.setText(content_post);
-                        Uri profile_photo = Uri.parse(user_url_profile);
+                        tvName.setText(main_tweet.getUser_poster());
+                        tvUser.setText(main_tweet.getUser_poster());
+                        tvTweet.setText(main_tweet.getContent_post());
+                        Uri profile_photo = Uri.parse(main_tweet.getUser_url_profile());
                         Glide.with(CommentActivity.this).load(String.valueOf(profile_photo)).into(ivProfile);
-                        if(!image_url.equals("")){
+                        if(!main_tweet.getImage_url().equals("")){
                             Uri post_photo = Uri.parse(image_url);
                             Glide.with(CommentActivity.this).load(String.valueOf(post_photo)).into(ivImage);
                         }
                         else{
                             ivImage.setVisibility(View.GONE);
                         }
-
-
+                        //Para checkbox like
+                        if(main_tweet.getUsers_liked().size() == 0){
+                            likeButton.setText("");
+                        } else{
+                            //Precarga del boton del like
+                            for(String user: main_tweet.getUsers_liked()){
+                                if(user.equals(LOGGED_USER.getUID())){
+                                    likeButton.setChecked(true);
+                                    break;
+                                }
+                                else{
+                                    likeButton.setChecked(false);
+                                }
+                            }
+                            likeButton.setText(Integer.toString(main_tweet.getUsers_liked().size()));
+                        }
                     }
                 }
             }
@@ -129,6 +148,39 @@ public class CommentActivity extends AppCompatActivity {
 
             }
         });
+
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!likeButton.isChecked()){
+                    //Android
+                    ArrayList<String> liked_list_users = main_tweet.getUsers_liked();
+                    if(liked_list_users.contains(LOGGED_USER.getUID())){
+                        liked_list_users.remove(LOGGED_USER.getUID());
+                    }
+                    main_tweet.setUsers_liked(liked_list_users);
+
+                    //Firebasae
+                    MDATABASE.child("Posts").child(post_id).child("liked_users").child(LOGGED_USER.getUID()).setValue(false);
+                }
+                else if (likeButton.isChecked()) {
+                    //Android
+                    ArrayList<String> liked_list_users = main_tweet.getUsers_liked();
+                    liked_list_users.add(LOGGED_USER.getUID());
+                    main_tweet.setUsers_liked(liked_list_users);
+
+                    //Firebasae
+                    MDATABASE.child("Posts").child(post_id).child("liked_users").child(LOGGED_USER.getUID()).setValue(true);
+
+                }
+                if(main_tweet.getUsers_liked().size() == 0){
+                    likeButton.setText("");
+                } else{
+                    likeButton.setText(Integer.toString(main_tweet.getUsers_liked().size()));
+                }
+            }
+        });
+
         btVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

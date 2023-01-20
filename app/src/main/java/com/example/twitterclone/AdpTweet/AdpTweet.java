@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -64,6 +65,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
         TextView tvName, tvUser, tvTweet, tvCountComment;
         ImageView ivProfile,ivImage,commentButton;
         CheckBox likeButton;
+        LinearLayout cardLayout;
 
         //Recogera componentes del layout
         public ViewHolder(@NonNull View itemView){
@@ -76,6 +78,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             likeButton = itemView.findViewById(R.id.likeBtn);
             commentButton = itemView.findViewById(R.id.commentBtn);
             tvCountComment = itemView.findViewById(R.id.textCountComments);
+            cardLayout = itemView.findViewById(R.id.cardViewTweet);
         }
 
         //Pondra la informacion al objeto
@@ -164,6 +167,17 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                     itemView.getContext().startActivity(i);
                 }
             });
+
+            cardLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(itemView.getContext(), CommentActivity.class);
+                    i.putExtra("post_id", tweet.getId_post());
+                    itemView.getContext().startActivity(i);
+                }
+            });
+
+
         }
     }
 }
