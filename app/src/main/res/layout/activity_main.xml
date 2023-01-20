@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutParent"
     android:name="com.example.twitterclone.HomePage.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,20 +18,39 @@
       android:weightSum="1"
       app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/mainProfileActivity"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="50dp"
         android:layout_height="match_parent"
-        android:layout_weight=".8"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_weight=".2">
+
+      <com.google.android.material.imageview.ShapeableImageView
+          android:id="@+id/mainProfileActivity"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_marginLeft="5dp"
+          android:scaleType="centerCrop"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+          tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_weight=".5"
+        android:layout_weight=".6"
         app:srcCompat="@drawable/twitter_clone_icon" />
+
+    <Space
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".2" />
+
   </LinearLayout>
 
   <androidx.fragment.app.FragmentContainerView
@@ -59,5 +79,20 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="1.0"
       app:menu="@menu/nav_menu" />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fabPost"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="28dp"
+      android:background="@color/twitterBlue"
+      android:clickable="true"
+      android:contentDescription="Post Tweet"
+      android:tint="@color/white"
+      app:backgroundTint="@color/twitterBlue"
+      app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerView2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:srcCompat="@drawable/tweet_post_fab_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

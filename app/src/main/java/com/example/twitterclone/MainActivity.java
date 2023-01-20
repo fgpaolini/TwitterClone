@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,7 @@ import com.example.twitterclone.HomePage.HomeFragment;
 import com.example.twitterclone.HomePage.PostFragment;
 import com.example.twitterclone.HomePage.ProfileFragment;
 import com.example.twitterclone.ModelUser.ModelUser;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static String USER_UID;
     public static ModelUser LOGGED_USER;
     private ImageView profile;
+    private FloatingActionButton fabPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Se usara este fragmento al empezar
         replaceFragment(new HomeFragment());
+
+        fabPost = findViewById(R.id.fabPost);
+        fabPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new PostFragment());
+            }
+        });
 
         MAUTH = FirebaseAuth.getInstance();
         MTSTORAGE = FirebaseStorage.getInstance().getReference();
@@ -60,12 +71,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home_fragment:
                     replaceFragment(new HomeFragment());
+                    fabPost.setVisibility(View.VISIBLE);
                     break;
                 case R.id.post_fragment:
                     replaceFragment(new PostFragment());
+                    fabPost.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.profile_fragment:
                     replaceFragment(new ProfileFragment());
+                    fabPost.setVisibility(View.VISIBLE);
                     break;
             }
             return true;
