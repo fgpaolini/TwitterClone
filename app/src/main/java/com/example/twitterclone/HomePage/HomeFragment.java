@@ -2,6 +2,7 @@ package com.example.twitterclone.HomePage;
 
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.twitterclone.AdpTweet.AdpTweet;
+import com.example.twitterclone.MainActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,16 +29,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private ArrayList<TweetModel> list_posts;
-
+    private FloatingActionButton fabPostFunction;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-
         list_posts = new ArrayList<>();
+
+        fabPostFunction = v.findViewById(R.id.fabPost);
+        fabPostFunction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeFragment.this.getContext(), PostActivity.class);
+                startActivity(i);
+            }
+        });
 
         //Recogida de los posts
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,4 +120,6 @@ public class HomeFragment extends Fragment {
         recyclerViewPopular.setLayoutManager(new GridLayoutManager(v.getContext(),1));
         recyclerViewPopular.setAdapter(adpShop_adaptor_2);
     }
+
+
 }

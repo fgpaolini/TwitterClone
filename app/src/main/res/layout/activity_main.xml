@@ -80,19 +80,5 @@
       app:layout_constraintVertical_bias="1.0"
       app:menu="@menu/nav_menu" />
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-      android:id="@+id/fabPost"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginBottom="28dp"
-      android:background="@color/twitterBlue"
-      android:clickable="true"
-      android:contentDescription="Post Tweet"
-      android:tint="@color/white"
-      app:backgroundTint="@color/twitterBlue"
-      app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerView2"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:srcCompat="@drawable/tweet_post_fab_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

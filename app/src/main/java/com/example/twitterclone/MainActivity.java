@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.twitterclone.HomePage.PostActivity;
 import com.example.twitterclone.databinding.ActivityMainBinding;
 import com.example.twitterclone.HomePage.HomeFragment;
 import com.example.twitterclone.HomePage.PostFragment;
@@ -27,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     public static FirebaseAuth MAUTH;
     public static StorageReference MTSTORAGE;
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     public static String USER_UID;
     public static ModelUser LOGGED_USER;
     private ImageView profile;
-    private FloatingActionButton fabPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Se usara este fragmento al empezar
         replaceFragment(new HomeFragment());
-
-        fabPost = findViewById(R.id.fabPost);
-        fabPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                replaceFragment(new PostFragment());
-            }
-        });
 
         MAUTH = FirebaseAuth.getInstance();
         MTSTORAGE = FirebaseStorage.getInstance().getReference();
@@ -71,15 +65,9 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home_fragment:
                     replaceFragment(new HomeFragment());
-                    fabPost.setVisibility(View.VISIBLE);
-                    break;
-                case R.id.post_fragment:
-                    replaceFragment(new PostFragment());
-                    fabPost.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.profile_fragment:
                     replaceFragment(new ProfileFragment());
-                    fabPost.setVisibility(View.VISIBLE);
                     break;
             }
             return true;
