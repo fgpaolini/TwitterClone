@@ -37,6 +37,7 @@ import com.bumptech.glide.Glide;
 import com.example.twitterclone.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
@@ -176,7 +177,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                     MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(localDateTime);
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(ServerValue.TIMESTAMP);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
                     MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));

@@ -32,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.example.twitterclone.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
@@ -164,7 +165,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     MDATABASE.child("Posts").child("Post"+ post_count).child("name").setValue(USER_UID);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(LocalDateTime.now());
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(ServerValue.TIMESTAMP);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
                     MDATABASE.child("Posts").child("Post"+ post_count).child("comments").child("count_comments").setValue(0);
