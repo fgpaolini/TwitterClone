@@ -82,9 +82,7 @@ public class HomeFragment extends Fragment{
                             if (data.getKey().equals("User")) {
 
                                 user_poster = data.getValue().toString();
-
                             }
-
                             else if (data.getKey().equals("name")) {
                                 user_name = data.getValue().toString();
                             }

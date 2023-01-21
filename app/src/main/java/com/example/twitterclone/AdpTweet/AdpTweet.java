@@ -98,7 +98,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
 
             String post_time = tweetTimeAdp.getTime();
 
-            tvName.setText(tweet.getUser_poster());
+            tvName.setText(tweet.getUser_name());
             tvUser.setText("@" + tweet.getUser_poster());
             tvTweet.setText(tweet.getContent_post());
 
