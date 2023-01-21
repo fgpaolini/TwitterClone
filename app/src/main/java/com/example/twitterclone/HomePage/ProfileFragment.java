@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.twitterclone.AdpTweet.AdpTweet;
+import com.example.twitterclone.AdpTweet.TimeAdapter;
 import com.example.twitterclone.LoginActivity;
 import com.example.twitterclone.MainActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
@@ -53,6 +54,11 @@ public class ProfileFragment extends Fragment {
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private ArrayList<TweetModel> my_tweets;
 
+    private long currentTime;
+
+    private TimeAdapter tweetTimeAdp;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +72,8 @@ public class ProfileFragment extends Fragment {
         etUser = v.findViewById(R.id.profileUser);
         etDesctiption = v.findViewById(R.id.profileDescription);
 
+        //currentTime = 1674321765l;
+        currentTime = System.currentTimeMillis();
         my_tweets = new ArrayList<>();
 
         Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
@@ -137,6 +145,7 @@ public class ProfileFragment extends Fragment {
                         String user_uid = "";
                         String content_post = "";
                         String image_url = "";
+                        String post_time = "";
                         int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
 
@@ -160,6 +169,11 @@ public class ProfileFragment extends Fragment {
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
                             }
+
+                            else if (data.getKey().equals("postTime")) {
+
+                                post_time = data.getValue().toString();
+                            }
                             else if (data.getKey().equals("textPost")) {
                                 content_post = data.getValue().toString();
                             }
@@ -181,8 +195,9 @@ public class ProfileFragment extends Fragment {
 
                         }
                         if(user_uid.equals(LOGGED_USER.getUID())){
+
                             id_post = post.getKey();
-                            my_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
+                            my_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments));
                         }
                     }
 

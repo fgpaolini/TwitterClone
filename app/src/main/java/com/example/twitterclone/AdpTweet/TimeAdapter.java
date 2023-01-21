@@ -17,18 +17,21 @@ public class TimeAdapter {
 
     private String tweetTimeString;
 
-    private String currentTimeString;
+    private long currentTimeLong;
 
     private String DATE_TIME_OF_TWEET;
 
-    public TimeAdapter(String tweetTimeString, String currentTimeString) {
+    public TimeAdapter(String tweetTimeString, long currentTimeLong) {
         this.tweetTimeString = tweetTimeString;
-        this.currentTimeString = currentTimeString;
+        this.currentTimeLong = currentTimeLong;
     }
+
 
     public ZonedDateTime tweetTime() {
 
-        long epochTweetTime = Long.parseLong(tweetTimeString);
+
+            long epochTweetTime = Long.parseLong(tweetTimeString);
+
 
         tweetTime = Instant.ofEpochMilli(epochTweetTime).atZone(ZoneId.of("Europe/Madrid"));
 
@@ -37,7 +40,7 @@ public class TimeAdapter {
 
     public ZonedDateTime getCurrentDateTime() {
 
-        long epochCurrentTime = Long.parseLong(currentTimeString);
+        long epochCurrentTime = currentTimeLong;
 
         currentDateTime = Instant.ofEpochMilli(epochCurrentTime).atZone(ZoneId.of("Europe/Madrid"));
 
@@ -48,8 +51,10 @@ public class TimeAdapter {
 
     public String getTime() {
 
+        ZonedDateTime zdtTweet = tweetTime();
+        ZonedDateTime zdtCurrentTime = getCurrentDateTime();
 
-        duration = Duration.between(tweetTime, currentDateTime);
+        duration = Duration.between(zdtTweet, zdtCurrentTime);
 
         int seconds = 0;
         int minutes = 0;

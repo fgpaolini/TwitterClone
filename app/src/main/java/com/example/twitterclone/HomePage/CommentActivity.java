@@ -77,6 +77,7 @@ public class CommentActivity extends AppCompatActivity {
                         String user_name = "";
                         String user_uid = "";
                         String content_post = "";
+                        String post_time = "";
                         String image_url = "";
                         ArrayList<String> users_liked = new ArrayList<>();
 
@@ -91,6 +92,11 @@ public class CommentActivity extends AppCompatActivity {
                             }
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
+                            }
+
+                            else if (data.getKey().equals("postTime")) {
+
+                                post_time = data.getValue().toString();
                             }
                             else if (data.getKey().equals("textPost")) {
                                 content_post = data.getValue().toString();
@@ -114,7 +120,7 @@ public class CommentActivity extends AppCompatActivity {
                             }
                         }
 
-                        main_tweet = new TweetModel(id_post, user_poster, user_name, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments);
+                        main_tweet = new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments);
 
                         //Post pricipal a comentar rellenar
                         tvName.setText(main_tweet.getUser_poster());

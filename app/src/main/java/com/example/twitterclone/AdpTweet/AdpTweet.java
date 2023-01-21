@@ -39,6 +39,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
     private LayoutInflater mInflater;
     private ArrayList<TweetModel> list_post;
 
+
     public AdpTweet(Context context, ArrayList<TweetModel> list_post) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);;
@@ -65,7 +66,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvUser, tvTweet, tvCountComment;
+        TextView tvName, tvUser, tvTweet, tvCountComment, tvTTime;
         ImageView ivProfile,ivImage,commentButton;
         CheckBox likeButton;
         LinearLayout cardLayout;
@@ -76,6 +77,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvName = itemView.findViewById(R.id.tweet_post_name);
             tvUser = itemView.findViewById(R.id.tweet_post_user);
             tvTweet = itemView.findViewById(R.id.tweet_post);
+            tvTTime = itemView.findViewById(R.id.tvTweetTime);
             ivProfile = itemView.findViewById(R.id.post_profile_user);
             ivImage = itemView.findViewById(R.id.tweet_post_image);
             likeButton = itemView.findViewById(R.id.likeBtn);
@@ -86,9 +88,19 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
 
         //Pondra la informacion al objeto
         public void bindData(@NonNull TweetModel tweet){
+
+            long currentTime = System.currentTimeMillis();
+            TimeAdapter tweetTimeAdp = new TimeAdapter(tweet.getPost_time(), currentTime);
+
+            String post_time = tweetTimeAdp.getTime();
+
             tvName.setText(tweet.getUser_poster());
             tvUser.setText("@" + tweet.getUser_poster());
             tvTweet.setText(tweet.getContent_post());
+
+
+            tvTTime.setText(post_time);
+
 
             //Volver a poner el foto
             Uri profile_photo = Uri.parse(tweet.getUser_url_profile());
@@ -106,6 +118,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 Uri post_photo = Uri.parse(tweet.getImage_url());
                 Glide.with(itemView).load(String.valueOf(post_photo)).into(ivImage);
             }
+
             if(tweet.getUsers_liked().size() == 0){
                 likeButton.setText("");
             } else{

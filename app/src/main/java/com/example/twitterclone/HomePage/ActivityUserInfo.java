@@ -118,6 +118,7 @@ public class ActivityUserInfo extends AppCompatActivity {
                         String user_uid = "";
                         String content_post = "";
                         String image_url = "";
+                        String post_time = "";
                         int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
 
@@ -141,6 +142,11 @@ public class ActivityUserInfo extends AppCompatActivity {
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
                             }
+
+                            else if (data.getKey().equals("postTime")) {
+
+                                post_time = data.getValue().toString();
+                            }
                             else if (data.getKey().equals("textPost")) {
                                 content_post = data.getValue().toString();
                             }
@@ -163,7 +169,7 @@ public class ActivityUserInfo extends AppCompatActivity {
                         }
                         if(user_uid.equals(user.getUID())){
                             id_post = post.getKey();
-                            users_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
+                            users_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid,post_time, content_post, image_url, user_url_profile, users_liked, number_comments));
                         }
                     }
 

@@ -11,19 +11,29 @@ public class TweetModel {
     private String user_uid;
     private String content_post;
     private String image_url;
+    private String post_time;
     private ArrayList<String> users_liked;
     private int number_comments;
 
-    public TweetModel(String id_post, String user_poster, String user_name, String user_uid, String content_post, String image_url, String user_url_profile, ArrayList<String> users_liked, int number_comments) {
+    public TweetModel(String id_post, String user_poster, String user_name, String user_uid, String post_time, String content_post, String image_url, String user_url_profile, ArrayList<String> users_liked, int number_comments) {
         this.id_post = id_post;
         this.user_poster = user_poster;
         this.user_name = user_name;
         this.user_uid = user_uid;
+        this.post_time = post_time;
         this.content_post = content_post;
         this.image_url = image_url;
         this.user_url_profile = user_url_profile;
         this.users_liked = users_liked;
         this.number_comments = number_comments;
+    }
+
+    public String getPost_time() {
+        return post_time;
+    }
+
+    public void setPost_time(String post_time) {
+        this.post_time = post_time;
     }
 
     public int getNumber_comments() {

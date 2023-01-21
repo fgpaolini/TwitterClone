@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.twitterclone.AdpTweet.AdpTweet;
+import com.example.twitterclone.AdpTweet.TimeAdapter;
 import com.example.twitterclone.MainActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
@@ -28,11 +29,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
 public class HomeFragment extends Fragment{
 
     private ArrayList<TweetModel> list_posts;
     private FloatingActionButton fabPostFunction;
+
+    private long currentTime;
+
+    private TimeAdapter tweetTimeAdp;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,8 +55,13 @@ public class HomeFragment extends Fragment{
             }
         });
 
+        //currentTime = 1674321765l;
+        currentTime = System.currentTimeMillis();
+
         //Recogida de los posts
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot post: snapshot.getChildren()){
@@ -62,6 +74,7 @@ public class HomeFragment extends Fragment{
                         String user_name = "";
                         String content_post = "";
                         String image_url = "";
+                        String post_time = "";
                         int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
 
@@ -71,7 +84,6 @@ public class HomeFragment extends Fragment{
                                 user_poster = data.getValue().toString();
 
                             }
-
 
                             else if (data.getKey().equals("name")) {
                                 user_name = data.getValue().toString();
@@ -86,6 +98,12 @@ public class HomeFragment extends Fragment{
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
                             }
+
+                            else if (data.getKey().equals("postTime")) {
+
+                                post_time = data.getValue().toString();
+                            }
+
                             else if (data.getKey().equals("textPost")) {
                                 content_post = data.getValue().toString();
                             }
@@ -105,8 +123,9 @@ public class HomeFragment extends Fragment{
                             }
                         }
 
+
                         id_post = post.getKey();
-                        list_posts.add(new TweetModel(id_post, user_poster, user_name, user_uid, content_post, image_url, user_url_profile, users_liked, number_comments));
+                        list_posts.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments));
 
                     }
 
