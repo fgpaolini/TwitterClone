@@ -51,7 +51,7 @@ import java.util.ArrayList;
 public class ProfileFragment extends Fragment {
 
     private ImageView ivPhotoUser;
-    private Button btChangePhoto, btLogout, btChangeName;
+    private Button btChangePhoto, btLogout, btChangeName, btChangeProfile;
     private TextView etName, etDesctiption, etUser;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private ArrayList<TweetModel> my_tweets;
@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment {
         btChangePhoto = v.findViewById(R.id.changeProfilePicBtn);
         btLogout = v.findViewById(R.id.btLogOut);
         btChangeName = v.findViewById(R.id.btChangeUserName);
+        btChangeProfile = v.findViewById(R.id.btChangeUserDescription);
 
         etName = v.findViewById(R.id.profileUserName);
         etUser = v.findViewById(R.id.profileUser);
@@ -152,11 +153,16 @@ public class ProfileFragment extends Fragment {
 
                 change_name_dialog.show();
 
+                TextView tvChangeTitle;
                 EditText etChange;
                 Button btChange;
 
+                tvChangeTitle = v.findViewById(R.id.titleChange);
+                tvChangeTitle.setText("Cambiar Nombre");
                 etChange = v.findViewById(R.id.etNameToChange);
+                etChange.setHint("Nombre");
                 btChange = v.findViewById(R.id.btChangeNameDatabase);
+
                 btChange.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -188,6 +194,57 @@ public class ProfileFragment extends Fragment {
 
 
                         Toast.makeText(ProfileFragment.this.getContext(), "Nombre cambiado", Toast.LENGTH_SHORT).show();
+                        change_name_dialog.dismiss();
+                    }
+                });
+            }
+        });
+
+        btChangeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Preparar la pantalla de carga
+                AlertDialog change_name_dialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileFragment.this.getContext());
+                builder.setCancelable(false);
+
+                //Preparar para agregar el layout
+                LayoutInflater inflater = getLayoutInflater();
+                v = inflater.inflate(R.layout.alert_change_name, null);
+
+                //Configurando el layout en el view
+                builder.setView(v);
+                change_name_dialog = builder.create();
+
+                change_name_dialog.show();
+
+                TextView tvChangeTitle;
+                EditText etChange;
+                Button btChange;
+
+                tvChangeTitle = v.findViewById(R.id.titleChange);
+                tvChangeTitle.setText("Cambiar descripcion");
+                etChange = v.findViewById(R.id.etNameToChange);
+                etChange.setHint("Descripcion");
+                btChange = v.findViewById(R.id.btChangeNameDatabase);
+
+                btChange.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String new_description = etChange.getText().toString();
+                        if(new_description.isEmpty()){
+                            Toast.makeText(ProfileFragment.this.getContext(), "No puede estar la descricion vacio", Toast.LENGTH_SHORT).show();
+                            etChange.requestFocus();
+                            return;
+                        } else if (new_description.length() >= 51) {
+                            Toast.makeText(ProfileFragment.this.getContext(), "No puede haber mas de 50 caracteres", Toast.LENGTH_SHORT).show();
+                            etChange.requestFocus();
+                            return;
+                        }
+                        MDATABASE.child("User").child(LOGGED_USER.getUID()).child("description").setValue(new_description);
+
+                        Toast.makeText(ProfileFragment.this.getContext(), "Descripcion cambiado", Toast.LENGTH_SHORT).show();
                         change_name_dialog.dismiss();
                     }
                 });
