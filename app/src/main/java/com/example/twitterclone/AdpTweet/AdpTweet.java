@@ -25,6 +25,7 @@ import com.example.twitterclone.HomePage.ActivityUserInfo;
 import com.example.twitterclone.HomePage.CommentActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -67,7 +68,10 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvName, tvUser, tvTweet, tvCountComment, tvTTime;
-        ImageView ivProfile,ivImage,commentButton;
+        ImageView ivProfile, commentButton;
+
+        ShapeableImageView ivImage;
+
         CheckBox likeButton;
         LinearLayout cardLayout;
 

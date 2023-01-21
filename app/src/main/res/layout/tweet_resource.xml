@@ -94,12 +94,13 @@
                     android:paddingLeft="20dp"
                     android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat ma." />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/tweet_post_image"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    app:shapeAppearanceOverlay="@style/roundedCornersImageView"
                     android:scaleType="centerCrop"
                     android:visibility="gone" />
 

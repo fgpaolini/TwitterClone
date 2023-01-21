@@ -61,7 +61,6 @@ public class HomeFragment extends Fragment{
         //Recogida de los posts
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
 
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot post: snapshot.getChildren()){
@@ -81,6 +80,7 @@ public class HomeFragment extends Fragment{
                         for(DataSnapshot data: post.getChildren()){
 
                             if (data.getKey().equals("User")) {
+
                                 user_poster = data.getValue().toString();
 
                             }
