@@ -160,7 +160,7 @@ public class ProfileFragment extends Fragment {
                 tvChangeTitle = v.findViewById(R.id.titleChange);
                 tvChangeTitle.setText("Cambiar Nombre");
                 etChange = v.findViewById(R.id.etNameToChange);
-                etChange.setText("Nombre");
+                etChange.setHint("Nombre");
                 btChange = v.findViewById(R.id.btChangeNameDatabase);
 
                 btChange.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +226,7 @@ public class ProfileFragment extends Fragment {
                 tvChangeTitle = v.findViewById(R.id.titleChange);
                 tvChangeTitle.setText("Cambiar descripcion");
                 etChange = v.findViewById(R.id.etNameToChange);
-                etChange.setText("Descripcion");
+                etChange.setHint("Descripcion");
                 btChange = v.findViewById(R.id.btChangeNameDatabase);
 
                 btChange.setOnClickListener(new View.OnClickListener() {
