@@ -162,7 +162,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
                     post_count++;
                     MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("name").setValue(USER_UID);
+                    MDATABASE.child("Posts").child("Post"+ post_count).child("name").setValue(LOGGED_USER.getName());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
                     MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
                     MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(ServerValue.TIMESTAMP);

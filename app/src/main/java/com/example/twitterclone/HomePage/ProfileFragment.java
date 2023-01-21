@@ -5,6 +5,7 @@ import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 import static com.example.twitterclone.MainActivity.MTSTORAGE;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +51,7 @@ import java.util.ArrayList;
 public class ProfileFragment extends Fragment {
 
     private ImageView ivPhotoUser;
-    private Button btChangePhoto, btLogout;
+    private Button btChangePhoto, btLogout, btChangeName;
     private TextView etName, etDesctiption, etUser;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private ArrayList<TweetModel> my_tweets;
@@ -67,6 +69,7 @@ public class ProfileFragment extends Fragment {
         ivPhotoUser = v.findViewById(R.id.ivProfileUserPic);
         btChangePhoto = v.findViewById(R.id.changeProfilePicBtn);
         btLogout = v.findViewById(R.id.btLogOut);
+        btChangeName = v.findViewById(R.id.btChangeUserName);
 
         etName = v.findViewById(R.id.profileUserName);
         etUser = v.findViewById(R.id.profileUser);
@@ -130,6 +133,66 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        btChangeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Preparar la pantalla de carga
+                AlertDialog change_name_dialog;
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileFragment.this.getContext());
+                builder.setCancelable(false);
+
+                //Preparar para agregar el layout
+                LayoutInflater inflater = getLayoutInflater();
+                v = inflater.inflate(R.layout.alert_change_name, null);
+
+                //Configurando el layout en el view
+                builder.setView(v);
+                change_name_dialog = builder.create();
+
+                change_name_dialog.show();
+
+                EditText etChange;
+                Button btChange;
+
+                etChange = v.findViewById(R.id.etNameToChange);
+                btChange = v.findViewById(R.id.btChangeNameDatabase);
+                btChange.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String new_name = etChange.getText().toString();
+                        if(new_name.isEmpty()){
+                            Toast.makeText(ProfileFragment.this.getContext(), "No puede estar el nombre vacio", Toast.LENGTH_SHORT).show();
+                            etChange.requestFocus();
+                            return;
+                        }
+                        MDATABASE.child("User").child(LOGGED_USER.getUID()).child("name").setValue(new_name);
+
+                        //Cambio de nombre de todos los post del mismo usuario
+                        MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot post: snapshot.getChildren()){
+                                    for(DataSnapshot data_post: post.getChildren()){
+                                        if(data_post.getKey().equals("UID") && data_post.getValue().toString().equals(LOGGED_USER.getUID())){
+                                            MDATABASE.child("Posts").child(post.getKey()).child("name").setValue(new_name);
+                                        }
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+                        Toast.makeText(ProfileFragment.this.getContext(), "Nombre cambiado", Toast.LENGTH_SHORT).show();
+                        change_name_dialog.dismiss();
+                    }
+                });
+            }
+        });
 
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
