@@ -20,6 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".HomePage.PostActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

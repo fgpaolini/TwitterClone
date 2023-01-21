@@ -97,7 +97,7 @@
             android:id="@+id/imagePost1"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_image" />
+            android:src="@drawable/image_picture_icon" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

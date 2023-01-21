@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -71,9 +72,8 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
         ImageView ivProfile, commentButton;
 
         ShapeableImageView ivImage;
-
         CheckBox likeButton;
-        LinearLayout cardLayout;
+        ConstraintLayout cardLayout;
 
         //Recogera componentes del layout
         public ViewHolder(@NonNull View itemView){

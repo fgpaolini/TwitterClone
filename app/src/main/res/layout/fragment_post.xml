@@ -68,17 +68,16 @@
     <EditText
         android:id="@+id/etPostFill"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
+        android:ellipsize="end"
         android:ems="10"
         android:gravity="start"
-        android:ellipsize="end"
-        android:maxLines="10"
         android:hint="¿Que quieres publicar?"
         android:inputType="textImeMultiLine"
+        android:maxLines="10"
         android:paddingLeft="40dp"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
@@ -87,17 +86,17 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp">
 
         <ImageView
             android:id="@+id/imagePost1"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_no_image" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/image_picture_icon" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
