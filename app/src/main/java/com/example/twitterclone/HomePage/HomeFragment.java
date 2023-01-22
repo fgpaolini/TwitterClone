@@ -34,6 +34,7 @@ import java.util.Queue;
 public class HomeFragment extends Fragment{
 
     private ArrayList<TweetModel> list_posts;
+    public static ArrayList<TweetModel> ALL_POSTS;
     private FloatingActionButton fabPostFunction;
 
     private long currentTime;
@@ -76,6 +77,7 @@ public class HomeFragment extends Fragment{
                         String post_time = "";
                         int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
+                        ArrayList<String> users_retweet = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
@@ -119,15 +121,25 @@ public class HomeFragment extends Fragment{
                                     }
                                 }
                             }
+                            else if (data.getKey().equals("retweet_users")){
+                                for(DataSnapshot user_retweet: data.getChildren()){
+                                    String checked_is_retweeted = user_retweet.getValue().toString();
+                                    if(checked_is_retweeted.equals("true")){
+                                        users_retweet.add(user_retweet.getKey());
+                                    }
+                                }
+                            }
                         }
 
 
                         id_post = post.getKey();
-                        list_posts.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments));
+                        list_posts.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
 
                     }
 
                 }
+
+                ALL_POSTS = list_posts;
 
                 createRecycleProductsA(v, list_posts);
 

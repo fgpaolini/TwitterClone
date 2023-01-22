@@ -1,5 +1,6 @@
 package com.example.twitterclone.HomePage;
 
+import static com.example.twitterclone.HomePage.HomeFragment.ALL_POSTS;
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
@@ -24,6 +25,7 @@ import com.example.twitterclone.MainActivity;
 import com.example.twitterclone.ModelUser.ModelUser;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -34,11 +36,12 @@ public class ActivityUserInfo extends AppCompatActivity {
 
 
     private ImageView ivPhotoUser;
-    private Button btChangePhoto, btLogout;
+    private Button btLogout;
     private TextView etName, etDesctiption, etUser;
-    private ArrayList<TweetModel> users_tweets;
+    private ArrayList<TweetModel> users_tweets, lists_retweets;
     private String UID;
     private ModelUser user;
+    private TabLayout postsTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,10 @@ public class ActivityUserInfo extends AppCompatActivity {
         etName = findViewById(R.id.profileUserName);
         etUser = findViewById(R.id.profileUser);
         etDesctiption = findViewById(R.id.profileDescription);
+        postsTab = findViewById(R.id.postsTab);
 
         users_tweets = new ArrayList<>();
+        lists_retweets = new ArrayList<>();
         fill_logged_user();
         fill_user_posts();
 
@@ -65,6 +70,28 @@ public class ActivityUserInfo extends AppCompatActivity {
                 finish();
             }
         });
+
+        postsTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 0){
+                    createRecycleViewMyTweets(users_tweets);
+                } else if (tab.getPosition() == 1) {
+                    createRecycleViewMyTweets(lists_retweets);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     public void fill_logged_user() {
@@ -93,6 +120,8 @@ public class ActivityUserInfo extends AppCompatActivity {
                 etName.setText("Nombre: " + user.getName());
                 etUser.setText("Usuario: " + user.getUser());
                 etDesctiption.setText("Descripcion: " + user.getUser_description());
+
+                fillRetweetPost();
             }
 
             @Override
@@ -121,6 +150,7 @@ public class ActivityUserInfo extends AppCompatActivity {
                         String post_time = "";
                         int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
+                        ArrayList<String> users_retweet = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
@@ -164,18 +194,26 @@ public class ActivityUserInfo extends AppCompatActivity {
                                     }
                                 }
                             }
+                            else if (data.getKey().equals("retweet_users")){
+                                for(DataSnapshot user_retweet: data.getChildren()){
+                                    String checked_is_retweeted = user_retweet.getValue().toString();
+                                    if(checked_is_retweeted.equals("true")){
+                                        users_retweet.add(user_retweet.getKey());
+                                    }
+                                }
+                            }
 
 
                         }
                         if(user_uid.equals(user.getUID())){
                             id_post = post.getKey();
-                            users_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid,post_time, content_post, image_url, user_url_profile, users_liked, number_comments));
+                            users_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid,post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
                         }
                     }
 
                 }
 
-                createRecycleProductsA(users_tweets);
+                createRecycleViewMyTweets(users_tweets);
 
             }
 
@@ -188,7 +226,17 @@ public class ActivityUserInfo extends AppCompatActivity {
 
     }
 
-    public void createRecycleProductsA(ArrayList<TweetModel> list_to_show){
+    public void fillRetweetPost(){
+        for(TweetModel tweet: ALL_POSTS){
+            for(String userCheck: tweet.getUsers_retweet()){
+                if(userCheck.equals(user.getUID())){
+                    lists_retweets.add(tweet);
+                }
+            }
+        }
+    }
+
+    public void createRecycleViewMyTweets(ArrayList<TweetModel> list_to_show){
         AdpTweet adpShop_adaptor_2 = new AdpTweet(ActivityUserInfo.this, list_to_show);
         RecyclerView recyclerViewPopular = findViewById(R.id.rvProfileTweets);
         recyclerViewPopular.setLayoutManager(new GridLayoutManager(ActivityUserInfo.this,1));
