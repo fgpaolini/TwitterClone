@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         btLogin = findViewById(R.id.buttonLogin);
         btRegister = findViewById(R.id.btTextRegister);
-
         etMail = findViewById(R.id.etCorreoLogin);
         etPass = findViewById(R.id.etPasswordLogin);
 

@@ -74,7 +74,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="TextView"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/etPostFill"

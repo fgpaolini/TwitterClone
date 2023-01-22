@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">TwitterClone</string>
+    <string name="str_intro_text">See what\'s happening in the world right now</string>
+    <string name="str_create_account">Create account</string>
+    <string name="str_have_account">Have an account already?</string>
+    <string name="str_log_in">Log in</string>
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
