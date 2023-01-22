@@ -1,4 +1,4 @@
-package com.example.twitterclone;
+package com.example.twitterclone.IntroLogin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.twitterclone.MainActivity;
+import com.example.twitterclone.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

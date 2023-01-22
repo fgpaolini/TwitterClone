@@ -1,4 +1,4 @@
-package com.example.twitterclone;
+package com.example.twitterclone.IntroLogin;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.twitterclone.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
