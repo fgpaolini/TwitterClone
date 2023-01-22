@@ -13,9 +13,13 @@ public class TweetModel {
     private String image_url;
     private String post_time;
     private ArrayList<String> users_liked;
+    private ArrayList<String> users_retweet;
     private int number_comments;
 
-    public TweetModel(String id_post, String user_poster, String user_name, String user_uid, String post_time, String content_post, String image_url, String user_url_profile, ArrayList<String> users_liked, int number_comments) {
+    public TweetModel(String id_post, String user_poster, String user_name,
+                      String user_uid, String post_time, String content_post,
+                      String image_url, String user_url_profile, ArrayList<String> users_liked,
+                      int number_comments,  ArrayList<String> users_retweet) {
         this.id_post = id_post;
         this.user_poster = user_poster;
         this.user_name = user_name;
@@ -26,6 +30,15 @@ public class TweetModel {
         this.user_url_profile = user_url_profile;
         this.users_liked = users_liked;
         this.number_comments = number_comments;
+        this.users_retweet = users_retweet;
+    }
+
+    public ArrayList<String> getUsers_retweet() {
+        return users_retweet;
+    }
+
+    public void setUsers_retweet(ArrayList<String> users_retweet) {
+        this.users_retweet = users_retweet;
     }
 
     public String getPost_time() {

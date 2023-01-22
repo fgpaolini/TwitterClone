@@ -33,9 +33,9 @@ import java.util.ArrayList;
 
 public class CommentActivity extends AppCompatActivity {
 
-    private TextView tvName, tvUser, tvTweet;
+    private TextView tvName, tvUser, tvTweet, tvLiked, tvRetweeted;
     private ImageView ivProfile,ivImage;
-    private CheckBox likeButton;
+    private CheckBox likeButton, retweetButton;
     private String post_id;
     private ArrayList<CommentModel> list_comments;
     private Button btCommentar, btVolver;
@@ -54,6 +54,8 @@ public class CommentActivity extends AppCompatActivity {
 
         tvName = findViewById(R.id.tweet_post_name);
         tvUser = findViewById(R.id.tweet_post_user);
+        tvLiked = findViewById(R.id.tvAmmountLiked);
+        tvRetweeted = findViewById(R.id.tvAmmountRetweet);
         tvTweet = findViewById(R.id.tweet_post);
         ivProfile = findViewById(R.id.post_profile_user);
         ivImage = findViewById(R.id.tweet_post_image);
@@ -61,6 +63,7 @@ public class CommentActivity extends AppCompatActivity {
         btCommentar = findViewById(R.id.btCommentarEnviar);
         etTextoCommentar = findViewById(R.id.etCommentar);
         btVolver = findViewById(R.id.btCancel);
+        retweetButton = findViewById(R.id.rtBtn);
         likeButton = findViewById(R.id.likeBtn);
 
         list_comments = new ArrayList<>();
@@ -80,6 +83,7 @@ public class CommentActivity extends AppCompatActivity {
                         String post_time = "";
                         String image_url = "";
                         ArrayList<String> users_liked = new ArrayList<>();
+                        ArrayList<String> users_retweet = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
@@ -118,9 +122,17 @@ public class CommentActivity extends AppCompatActivity {
                                     }
                                 }
                             }
+                            else if (data.getKey().equals("retweet_users")){
+                                for(DataSnapshot user_retweet: data.getChildren()){
+                                    String checked_is_retweeted = user_retweet.getValue().toString();
+                                    if(checked_is_retweeted.equals("true")){
+                                        users_retweet.add(user_retweet.getKey());
+                                    }
+                                }
+                            }
                         }
 
-                        main_tweet = new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments);
+                        main_tweet = new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet);
 
                         //Post pricipal a comentar rellenar
                         tvName.setText(main_tweet.getUser_poster());
@@ -137,7 +149,7 @@ public class CommentActivity extends AppCompatActivity {
                         }
                         //Para checkbox like
                         if(main_tweet.getUsers_liked().size() == 0){
-                            likeButton.setText("");
+                            tvLiked.setText("");
                         } else{
                             //Precarga del boton del like
                             for(String user: main_tweet.getUsers_liked()){
@@ -149,7 +161,23 @@ public class CommentActivity extends AppCompatActivity {
                                     likeButton.setChecked(false);
                                 }
                             }
-                            likeButton.setText(Integer.toString(main_tweet.getUsers_liked().size()));
+                            tvLiked.setText(Integer.toString(main_tweet.getUsers_liked().size()));
+                        }
+                        //Para checkbox retweet
+                        if(main_tweet.getUsers_retweet().size() == 0){
+                            tvRetweeted.setText("");
+                        } else{
+                            //Precarga del boton del like
+                            for(String user: main_tweet.getUsers_retweet()){
+                                if(user.equals(LOGGED_USER.getUID())){
+                                    retweetButton.setChecked(true);
+                                    break;
+                                }
+                                else{
+                                    retweetButton.setChecked(false);
+                                }
+                            }
+                            tvRetweeted.setText(Integer.toString(main_tweet.getUsers_retweet().size()));
                         }
                     }
                 }
@@ -186,12 +214,46 @@ public class CommentActivity extends AppCompatActivity {
 
                 }
                 if(main_tweet.getUsers_liked().size() == 0){
-                    likeButton.setText("");
+                    tvLiked.setText("");
                 } else{
-                    likeButton.setText(Integer.toString(main_tweet.getUsers_liked().size()));
+                    tvLiked.setText(Integer.toString(main_tweet.getUsers_liked().size()));
                 }
             }
         });
+
+        //Acciones en caso de click retweet
+        retweetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!retweetButton.isChecked()){
+                    //Android
+                    ArrayList<String> retweet_list_users = main_tweet.getUsers_retweet();
+                    if(retweet_list_users.contains(LOGGED_USER.getUID())){
+                        retweet_list_users.remove(LOGGED_USER.getUID());
+                    }
+                    main_tweet.setUsers_liked(retweet_list_users);
+
+                    //Firebasae
+                    MDATABASE.child("Posts").child(main_tweet.getId_post()).child("retweet_users").child(LOGGED_USER.getUID()).setValue(false);
+                }
+                else if (retweetButton.isChecked()) {
+                    //Android
+                    ArrayList<String> retweet_list_users = main_tweet.getUsers_retweet();
+                    retweet_list_users.add(LOGGED_USER.getUID());
+                    main_tweet.setUsers_liked(retweet_list_users);
+
+                    //Firebasae
+                    MDATABASE.child("Posts").child(main_tweet.getId_post()).child("retweet_users").child(LOGGED_USER.getUID()).setValue(true);
+
+                }
+                if(main_tweet.getUsers_retweet().size() == 0){
+                    tvRetweeted.setText("");
+                } else{
+                    tvRetweeted.setText(Integer.toString(main_tweet.getUsers_retweet().size()));
+                }
+            }
+        });
+
 
         btVolver.setOnClickListener(new View.OnClickListener() {
             @Override

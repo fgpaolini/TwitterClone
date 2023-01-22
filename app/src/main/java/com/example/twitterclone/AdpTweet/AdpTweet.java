@@ -68,11 +68,11 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvUser, tvTweet, tvCountComment, tvTTime;
+        TextView tvName, tvUser, tvTweet, tvCountComment, tvTTime, tvLiked, tvRetweeted;
         ImageView ivProfile, commentButton;
 
         ShapeableImageView ivImage;
-        CheckBox likeButton;
+        CheckBox likeButton, retweetButton;
         ConstraintLayout cardLayout;
 
         //Recogera componentes del layout
@@ -80,6 +80,8 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             super(itemView);
             tvName = itemView.findViewById(R.id.tweet_post_name);
             tvUser = itemView.findViewById(R.id.tweet_post_user);
+            tvLiked = itemView.findViewById(R.id.tvAmmountLiked);
+            tvRetweeted = itemView.findViewById(R.id.tvAmmountRetweet);
             tvTweet = itemView.findViewById(R.id.tweet_post);
             tvTTime = itemView.findViewById(R.id.tvTweetTime);
             ivProfile = itemView.findViewById(R.id.post_profile_user);
@@ -88,6 +90,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             commentButton = itemView.findViewById(R.id.commentBtn);
             tvCountComment = itemView.findViewById(R.id.textCountComments);
             cardLayout = itemView.findViewById(R.id.cardViewTweet);
+            retweetButton = itemView.findViewById(R.id.rtBtn);
         }
 
         //Pondra la informacion al objeto
@@ -101,10 +104,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvName.setText(tweet.getUser_name());
             tvUser.setText("@" + tweet.getUser_poster());
             tvTweet.setText(tweet.getContent_post());
-
-
             tvTTime.setText(post_time);
-
 
             //Volver a poner el foto
             Uri profile_photo = Uri.parse(tweet.getUser_url_profile());
@@ -124,7 +124,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             }
 
             if(tweet.getUsers_liked().size() == 0){
-                likeButton.setText("");
+                tvLiked.setText("");
             } else{
                 //Precarga del boton del like
                 for(String user: tweet.getUsers_liked()){
@@ -136,8 +136,25 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                         likeButton.setChecked(false);
                     }
                 }
-                likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
+                tvLiked.setText(Integer.toString(tweet.getUsers_liked().size()));
             }
+
+            if(tweet.getUsers_retweet().size() == 0){
+                tvRetweeted.setText("");
+            } else{
+                //Precarga del boton del like
+                for(String user: tweet.getUsers_retweet()){
+                    if(user.equals(LOGGED_USER.getUID())){
+                        retweetButton.setChecked(true);
+                        break;
+                    }
+                    else{
+                        retweetButton.setChecked(false);
+                    }
+                }
+                tvRetweeted.setText(Integer.toString(tweet.getUsers_retweet().size()));
+            }
+
             //Acciones en caso de ser clicado el like
             likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -164,9 +181,42 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
 
                     }
                     if(tweet.getUsers_liked().size() == 0){
-                        likeButton.setText("");
+                        tvLiked.setText("");
                     } else{
-                        likeButton.setText(Integer.toString(tweet.getUsers_liked().size()));
+                        tvLiked.setText(Integer.toString(tweet.getUsers_liked().size()));
+                    }
+                }
+            });
+
+            //Acciones en caso de click retweet
+            retweetButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!retweetButton.isChecked()){
+                        //Android
+                        ArrayList<String> retweet_list_users = tweet.getUsers_retweet();
+                        if(retweet_list_users.contains(LOGGED_USER.getUID())){
+                            retweet_list_users.remove(LOGGED_USER.getUID());
+                        }
+                        tweet.setUsers_liked(retweet_list_users);
+
+                        //Firebasae
+                        MDATABASE.child("Posts").child(tweet.getId_post()).child("retweet_users").child(LOGGED_USER.getUID()).setValue(false);
+                    }
+                    else if (retweetButton.isChecked()) {
+                        //Android
+                        ArrayList<String> retweet_list_users = tweet.getUsers_retweet();
+                        retweet_list_users.add(LOGGED_USER.getUID());
+                        tweet.setUsers_liked(retweet_list_users);
+
+                        //Firebasae
+                        MDATABASE.child("Posts").child(tweet.getId_post()).child("retweet_users").child(LOGGED_USER.getUID()).setValue(true);
+
+                    }
+                    if(tweet.getUsers_retweet().size() == 0){
+                        tvRetweeted.setText("");
+                    } else{
+                        tvRetweeted.setText(Integer.toString(tweet.getUsers_retweet().size()));
                     }
                 }
             });

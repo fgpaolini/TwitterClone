@@ -98,6 +98,7 @@
                         android:id="@+id/profileDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:text="Some dream of fire, to help keep winter at bay." />
 
                     <LinearLayout
@@ -135,19 +136,28 @@
                             android:text="Followers" />
                     </LinearLayout>
 
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/postsTab"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mis posts" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Retweets" />
+
+                    </com.google.android.material.tabs.TabLayout>
+
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:text="Mis posts"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:paddingVertical="15dp">
-            </TextView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

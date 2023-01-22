@@ -1,6 +1,7 @@
 package com.example.twitterclone.HomePage;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.twitterclone.HomePage.HomeFragment.ALL_POSTS;
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 import static com.example.twitterclone.MainActivity.MTSTORAGE;
@@ -38,6 +39,7 @@ import com.example.twitterclone.IntroLogin.LoginActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -53,12 +55,13 @@ public class ProfileFragment extends Fragment {
     private Button btChangePhoto, btLogout, btChangeName, btChangeProfile;
     private TextView etName, etDesctiption, etUser;
     private ActivityResultLauncher<Intent> activityResultLauncher;
-    private ArrayList<TweetModel> my_tweets;
+    private ArrayList<TweetModel> my_tweets, lists_retweets;
 
     private long currentTime;
 
     private TimeAdapter tweetTimeAdp;
 
+    private TabLayout postsTab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +73,7 @@ public class ProfileFragment extends Fragment {
         btLogout = v.findViewById(R.id.btLogOut);
         btChangeName = v.findViewById(R.id.btChangeUserName);
         btChangeProfile = v.findViewById(R.id.btChangeUserDescription);
+        postsTab = v.findViewById(R.id.postsTab);
 
         etName = v.findViewById(R.id.profileUserName);
         etUser = v.findViewById(R.id.profileUser);
@@ -78,6 +82,7 @@ public class ProfileFragment extends Fragment {
         //currentTime = 1674321765l;
         currentTime = System.currentTimeMillis();
         my_tweets = new ArrayList<>();
+        lists_retweets = new ArrayList<>();
 
         Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
         Glide.with(ProfileFragment.this).load(String.valueOf(profile_photo)).into(ivPhotoUser);
@@ -250,6 +255,65 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        fillUsersPost(v);
+        fillRetweetPost();
+
+        postsTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 0){
+                    createRecycleViewMyTweets(v, my_tweets);
+                } else if (tab.getPosition() == 1) {
+                    createRecycleViewMyTweets(v, lists_retweets);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        return v;
+    }
+
+    public void createRecycleViewMyTweets(@NonNull View v, ArrayList<TweetModel> list_to_show){
+        AdpTweet adpShop_adaptor_2 = new AdpTweet(v.getContext(), list_to_show);
+        RecyclerView recyclerViewPopular = v.findViewById(R.id.rvProfileTweets);
+        recyclerViewPopular.setLayoutManager(new GridLayoutManager(v.getContext(),1));
+        recyclerViewPopular.setAdapter(adpShop_adaptor_2);
+    }
+
+    //Creas en el Firebase Storage un nuevo imagen
+    public void saveImage(Uri imageUri, String uid){
+
+        if(imageUri != null){
+
+            StorageReference ubicacionImagen = MTSTORAGE.child("User").child(uid).child("profile.png");
+            ubicacionImagen.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ubicacionImagen.getDownloadUrl().addOnCompleteListener(task -> {
+                        Uri imageURL = task.getResult();
+                        MDATABASE.child("User").child(LOGGED_USER.getUID()).child("pic").setValue(imageURL.toString());
+                    });
+                    Toast.makeText(ProfileFragment.this.getContext(), "Imagen subido exitosamente", Toast.LENGTH_SHORT).show();
+                }
+                public void onFailure(@NonNull Exception exception) {
+                    Toast.makeText(ProfileFragment.this.getContext(), "Algo a salido mal...", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+    public void fillUsersPost(View v){
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -267,6 +331,7 @@ public class ProfileFragment extends Fragment {
                         String post_time = "";
                         int number_comments = 0;
                         ArrayList<String> users_liked = new ArrayList<>();
+                        ArrayList<String> users_retweet = new ArrayList<>();
 
                         for(DataSnapshot data: post.getChildren()){
 
@@ -310,19 +375,27 @@ public class ProfileFragment extends Fragment {
                                     }
                                 }
                             }
+                            else if (data.getKey().equals("retweet_users")){
+                                for(DataSnapshot user_retweet: data.getChildren()){
+                                    String checked_is_retweeted = user_retweet.getValue().toString();
+                                    if(checked_is_retweeted.equals("true")){
+                                        users_retweet.add(user_retweet.getKey());
+                                    }
+                                }
+                            }
 
 
                         }
                         if(user_uid.equals(LOGGED_USER.getUID())){
 
                             id_post = post.getKey();
-                            my_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments));
+                            my_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
                         }
                     }
 
                 }
 
-                createRecycleProductsA(v, my_tweets);
+                createRecycleViewMyTweets(v, my_tweets);
 
             }
 
@@ -332,37 +405,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        return v;
     }
 
-    public void createRecycleProductsA(@NonNull View v, ArrayList<TweetModel> list_to_show){
-        AdpTweet adpShop_adaptor_2 = new AdpTweet(v.getContext(), list_to_show);
-        RecyclerView recyclerViewPopular = v.findViewById(R.id.rvProfileTweets);
-        recyclerViewPopular.setLayoutManager(new GridLayoutManager(v.getContext(),1));
-        recyclerViewPopular.setAdapter(adpShop_adaptor_2);
-    }
-
-    //Creas en el Firebase Storage un nuevo imagen
-    public void saveImage(Uri imageUri, String uid){
-
-        if(imageUri != null){
-
-            StorageReference ubicacionImagen = MTSTORAGE.child("User").child(uid).child("profile.png");
-            ubicacionImagen.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    ubicacionImagen.getDownloadUrl().addOnCompleteListener(task -> {
-                        Uri imageURL = task.getResult();
-                        MDATABASE.child("User").child(LOGGED_USER.getUID()).child("pic").setValue(imageURL.toString());
-                    });
-                    Toast.makeText(ProfileFragment.this.getContext(), "Imagen subido exitosamente", Toast.LENGTH_SHORT).show();
+    public void fillRetweetPost(){
+        for(TweetModel tweet: ALL_POSTS){
+            for(String user: tweet.getUsers_retweet()){
+                if(user.equals(LOGGED_USER.getUID())){
+                    lists_retweets.add(tweet);
                 }
-                public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(ProfileFragment.this.getContext(), "Algo a salido mal...", Toast.LENGTH_SHORT).show();
-                }
-            });
+            }
         }
-
     }
 
 

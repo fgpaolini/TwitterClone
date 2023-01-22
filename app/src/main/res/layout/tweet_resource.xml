@@ -134,12 +134,32 @@
                     android:textSize="15dp"
                     android:visibility="gone"></TextView>
 
-                <ImageView
-                    android:id="@+id/rtBtn"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/twitter_retweet" />
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/rtBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@drawable/retweet_checkbox"
+                        android:elegantTextHeight="true"
+                        android:gravity="left"
+                        android:textAlignment="gravity"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvAmmountRetweet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elegantTextHeight="false"
+                        android:gravity="left"
+                        android:text="1" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -159,7 +179,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/tvAmmountLiked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
