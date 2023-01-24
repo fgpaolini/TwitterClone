@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
@@ -138,6 +140,8 @@ public class HomeFragment extends Fragment{
                     }
 
                 }
+
+                Collections.reverse(list_posts);
 
                 ALL_POSTS = list_posts;
 
