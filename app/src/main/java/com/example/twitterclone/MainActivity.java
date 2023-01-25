@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.twitterclone.HomePage.PostActivity;
+import com.example.twitterclone.HomePage.SearchFragment;
 import com.example.twitterclone.databinding.ActivityMainBinding;
 import com.example.twitterclone.HomePage.HomeFragment;
 import com.example.twitterclone.HomePage.PostFragment;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity{
             switch (item.getItemId()) {
                 case R.id.home_fragment:
                     replaceFragment(new HomeFragment());
+                    break;
+                case R.id.search_fragment:
+                    replaceFragment(new SearchFragment());
                     break;
                 case R.id.profile_fragment:
                     replaceFragment(new ProfileFragment());
