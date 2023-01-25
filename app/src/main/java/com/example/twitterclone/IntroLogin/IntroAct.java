@@ -28,7 +28,8 @@ public class IntroAct extends AppCompatActivity {
         btn_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(IntroAct.this, LoginActivity.class);
+                Intent i = new Intent(IntroAct.this, RegisterActivity.class);
+
                 startActivity(i);
             }
         });
@@ -36,7 +37,8 @@ public class IntroAct extends AppCompatActivity {
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(IntroAct.this, RegisterActivity.class);
+                Intent i = new Intent(IntroAct.this, LoginActivity.class);
+
                 startActivity(i);
             }
         });
