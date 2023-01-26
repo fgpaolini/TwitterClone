@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                list_posts = new ArrayList<>();
                 createRecycleProductsA(v, list_posts);
                 fillPost(v);
                 swipeRefreshLayout.setRefreshing(false);
