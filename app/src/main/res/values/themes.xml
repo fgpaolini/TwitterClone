@@ -21,10 +21,7 @@
     </style>
 
     <style name="rondedButton" parent="">
-
         <item name="selectableItemBackground">@drawable/btn_round_blue</item>
-
-
     </style>
 
 

@@ -9,6 +9,7 @@ import static com.example.twitterclone.MainActivity.MTSTORAGE;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,9 +30,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.example.twitterclone.AdpTweet.AdpTweet;
@@ -39,6 +43,7 @@ import com.example.twitterclone.IntroLogin.LoginActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +56,11 @@ import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
 
-    private ImageView ivPhotoUser;
-    private Button btChangePhoto, btLogout, btChangeName, btChangeProfile;
+    private ShapeableImageView ivPhotoUser;
+    private Button btLogout, btChangeName, btChangeProfile;
+
+    private ToggleButton btEditProfile;
+    private ImageButton ibChangePic;
     private TextView etName, etDesctiption, etUser;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private ArrayList<TweetModel> my_tweets, lists_retweets;
@@ -69,7 +77,8 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         ivPhotoUser = v.findViewById(R.id.ivProfileUserPic);
-        btChangePhoto = v.findViewById(R.id.changeProfilePicBtn);
+        btEditProfile = v.findViewById(R.id.editProfileBtn);
+        ibChangePic = v.findViewById(R.id.changePicImBtn);
         btLogout = v.findViewById(R.id.btLogOut);
         btChangeName = v.findViewById(R.id.btChangeUserName);
         btChangeProfile = v.findViewById(R.id.btChangeUserDescription);
@@ -128,7 +137,26 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        btChangePhoto.setOnClickListener(new View.OnClickListener() {
+        btEditProfile.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                // The toggle is enabled
+
+                ibChangePic.setVisibility(View.VISIBLE);
+                ivPhotoUser.setStrokeWidth(10);
+                ivPhotoUser.setStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(this.getContext(), R.color.black)));
+
+
+            } else {
+                // The toggle is disabled
+                ibChangePic.setVisibility(View.GONE);
+                ivPhotoUser.setStrokeWidth(0);
+
+            }
+        });
+
+
+        ibChangePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //1ro se busca en el movil el archivo que desea cambiar
@@ -137,6 +165,7 @@ public class ProfileFragment extends Fragment {
                 activityResultLauncher.launch(i);
             }
         });
+
 
         btChangeName.setOnClickListener(new View.OnClickListener() {
             @Override

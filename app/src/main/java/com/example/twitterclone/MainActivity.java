@@ -2,6 +2,7 @@ package com.example.twitterclone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity{
     public static FirebaseAuth MAUTH;
     public static StorageReference MTSTORAGE;
     public static DatabaseReference MDATABASE;
+    public LinearLayout linearLayoutBar;
     public static String USER_UID;
     public static ModelUser LOGGED_USER;
     private ImageView profile;
@@ -66,13 +69,17 @@ public class MainActivity extends AppCompatActivity{
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.home_fragment:
+                    binding.linearLayoutBar.setVisibility(View.VISIBLE);
                     replaceFragment(new HomeFragment());
                     break;
                 case R.id.search_fragment:
+
                     replaceFragment(new SearchFragment());
+                    binding.linearLayoutBar.setVisibility(View.GONE);
                     break;
                 case R.id.profile_fragment:
                     replaceFragment(new ProfileFragment());
+                    binding.linearLayoutBar.setVisibility(View.GONE);
                     break;
             }
             return true;
@@ -110,7 +117,7 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void  replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView2, fragment);

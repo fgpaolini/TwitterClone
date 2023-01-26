@@ -17,47 +17,64 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintPerfil"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:orientation="horizontal">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp">
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center">
 
                             <ImageButton
-                                android:id="@+id/imageButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@android:color/transparent"
+                                android:id="@+id/changePicImBtn"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="10dp"
+                                android:adjustViewBounds="true"
+                                android:background="@drawable/transparent_black"
                                 android:backgroundTint="#74000000"
-                                android:backgroundTintMode="screen" android:src="@drawable/ic_cam_change"
+                                android:backgroundTintMode="screen"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_cam_change"
                                 android:translationZ="2dp"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/ivProfileUserPic"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/ivProfileUserPic" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="SpeakableTextPresentCheck" />
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/ivProfileUserPic"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:adjustViewBounds="true"
+                                android:padding="5dp"
                                 android:scaleType="centerCrop"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,25 +89,22 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
 
-                        <Button
-                            android:id="@+id/changeProfilePicBtn"
+                        <ToggleButton
+                            android:id="@+id/editProfileBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
                             android:layout_weight="1"
                             android:paddingLeft="10dp"
-                            android:text="Cambiar imagen" />
+                            android:text="Editar perfil"
+                            android:textOff="Editar perfil"
+                            android:textOn="Guardar" />
 
                         <Space
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
 
-                        <Button
-                            android:id="@+id/btLogOut"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Salir" />
                     </LinearLayout>
 
                     <Button
@@ -104,6 +118,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Cambiar descripcion" />
+
+                    <Button
+                        android:id="@+id/btLogOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Salir" />
 
                     <TextView
                         android:id="@+id/profileUserName"
@@ -160,23 +182,6 @@
                             android:text="Followers" />
                     </LinearLayout>
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/postsTab"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Mis posts" />
-
-                        <com.google.android.material.tabs.TabItem
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Retweets" />
-
-                    </com.google.android.material.tabs.TabLayout>
-
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -185,8 +190,25 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@android:color/darker_gray" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/postsTab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tweets" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Retweets" />
+
+            </com.google.android.material.tabs.TabLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintTweets"
