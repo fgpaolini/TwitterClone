@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment {
                 }
                 found_users = new ArrayList<>();
                 for(ModelUser user: all_users){
-                    if(user.getUser().contains(word)){
+                    if(user.getUser().toLowerCase().contains(word.toLowerCase())){
                         found_users.add(user);
                     }
                 }

@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
@@ -57,8 +58,9 @@ public class HomeFragment extends Fragment{
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
-
+                createRecycleProductsA(v, list_posts);
+                fillPost(v);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -73,6 +75,14 @@ public class HomeFragment extends Fragment{
         //currentTime = 1674321765l;
         currentTime = System.currentTimeMillis();
 
+        fillPost(v);
+
+
+        // Inflate the layout for this fragment
+        return v;
+    }
+
+    public void fillPost(@NonNull View v){
         //Recogida de los posts
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -152,7 +162,12 @@ public class HomeFragment extends Fragment{
 
                 }
 
-                Collections.reverse(list_posts);
+                Collections.sort(list_posts,new Comparator<TweetModel>() {
+                    @Override
+                    public int compare(TweetModel a, TweetModel b) {
+                        return b.getPost_time().compareTo(a.getPost_time());
+                    }
+                });
 
                 ALL_POSTS = list_posts;
 
@@ -166,8 +181,6 @@ public class HomeFragment extends Fragment{
             }
         });
 
-        // Inflate the layout for this fragment
-        return v;
     }
 
     public void createRecycleProductsA(@NonNull View v, ArrayList<TweetModel> list_to_show){
