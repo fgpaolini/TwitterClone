@@ -21,7 +21,20 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="50dp"
+                android:background="@color/twitterBlue">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_weight=".6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/twitter_clone_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -40,7 +53,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="80dp"
@@ -87,23 +101,37 @@
                         <Space
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_weight=".8" />
 
                         <ToggleButton
                             android:id="@+id/editProfileBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="right|center_vertical"
-                            android:layout_weight="1"
-                            android:paddingLeft="10dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight=".2"
+                            android:background="@drawable/custom_white_button"
+                            android:fontFamily="@font/chirp_light"
+                            android:gravity="center"
                             android:text="Editar perfil"
+                            android:textAllCaps="false"
                             android:textOff="Editar perfil"
-                            android:textOn="Guardar" />
+                            android:textOn="Guardar"
+                            android:textStyle="bold" />
 
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                        <ToggleButton
+                            android:id="@+id/settingImageButton"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:drawableStart="@drawable/baseline_settings_24"
+                            android:drawableTint="@color/colorgGainsboro"
+                            android:gravity="center"
+                            android:textOff=""
+                            android:textOn=""
+                            android:tint="@color/black" />
 
                     </LinearLayout>
 
@@ -121,14 +149,6 @@
                         android:text="Cambiar descripcion"
                         android:visibility="gone" />
 
-                    <Button
-                        android:id="@+id/btnBack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="Salir" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -140,8 +160,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight=".8"
+                            android:fontFamily="@font/chirp_bold"
                             android:paddingTop="5dp"
-                            android:text="Fernando" />
+                            android:text="Fernando"
+                            android:textColor="@color/notSoBlack"
+                            android:textSize="16sp" />
 
                         <ImageButton
                             android:id="@+id/namePencil"
@@ -165,7 +188,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight=".8"
-                            android:text="PaoliniFerg" />
+                            android:fontFamily="@font/chirp_medium"
+                            android:text="PaoliniFerg"
+                            android:textColor="@color/colorgGainsboro" />
 
                     </LinearLayout>
 
@@ -173,16 +198,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="2dp"
-                        android:weightSum="1"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
                         <TextView
                             android:id="@+id/profileDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight=".8"
                             android:layout_marginBottom="10dp"
-                            android:text="Some dream of fire, to help keep winter at bay." />
+                            android:layout_weight=".8"
+                            android:fontFamily="@font/chirp_light"
+                            android:text="Some dream of fire, to help keep winter at bay."
+                            android:textColor="@color/notSoBlack" />
 
                         <ImageButton
                             android:id="@+id/descriptionPencil"
@@ -193,6 +220,21 @@
                             android:src="@drawable/ic_edit"
                             android:visibility="gone" />
                     </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:fontFamily="@font/chirp_bold"
+                        android:text="Salir"
+                        android:textColor="@android:color/holo_red_light"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -238,17 +280,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/GreyEditText" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/postsTab"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tweets" />
+                    android:text="tweets"
+                    />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"

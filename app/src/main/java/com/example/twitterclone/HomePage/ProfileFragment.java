@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
     private ShapeableImageView ivPhotoUser;
     private Button btLogout, btChangeName, btChangeProfile;
 
-    private ToggleButton btEditProfile;
+    private ToggleButton btEditProfile, settingButton;
     private ImageButton ibChangePic, nameEditPencil, userEditPencil, descriptionEditPencil;
     private TextView etName, etDesctiption, etUser;
     private ActivityResultLauncher<Intent> activityResultLauncher;
@@ -82,6 +82,7 @@ public class ProfileFragment extends Fragment {
         btChangeName = v.findViewById(R.id.btChangeUserName);
         btChangeProfile = v.findViewById(R.id.btChangeUserDescription);
         postsTab = v.findViewById(R.id.postsTab);
+        settingButton = v.findViewById(R.id.settingImageButton);
 
         nameEditPencil = v.findViewById(R.id.namePencil);
         descriptionEditPencil = v.findViewById(R.id.descriptionPencil);
@@ -131,6 +132,21 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        settingButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                // The toggle is enabled
+                btLogout.setVisibility(View.VISIBLE);
+
+
+
+            } else {
+                // The toggle is disabled
+                btLogout.setVisibility(View.GONE);
+
+            }
+        });
+
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +164,7 @@ public class ProfileFragment extends Fragment {
                 nameEditPencil.setVisibility(View.VISIBLE);
                 descriptionEditPencil.setVisibility(View.VISIBLE);
                 ivPhotoUser.setStrokeWidth(10);
-                ivPhotoUser.setStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(this.getContext(), R.color.black)));
+                ivPhotoUser.setStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(this.getContext(), R.color.GreyEditText)));
 
 
             } else {
