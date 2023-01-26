@@ -58,6 +58,8 @@ public class HomeFragment extends Fragment{
             @Override
             public void onRefresh() {
 
+                createRecycleProductsA(v, ALL_POSTS);
+                swipeRefreshLayout.setRefreshing(false);
 
             }
         });
