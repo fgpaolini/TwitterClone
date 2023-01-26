@@ -24,6 +24,10 @@
         <item name="selectableItemBackground">@drawable/btn_round_blue</item>
     </style>
 
+    <style name="blueButtonStyle" parent="">
+        <item name="android:background">@drawable/custom_blue_button</item>
+
+    </style>
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
