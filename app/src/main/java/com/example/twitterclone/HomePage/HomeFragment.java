@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class HomeFragment extends Fragment{
     public static ArrayList<TweetModel> ALL_POSTS;
     private FloatingActionButton fabPostFunction;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private long currentTime;
 
     private TimeAdapter tweetTimeAdp;
@@ -50,6 +52,16 @@ public class HomeFragment extends Fragment{
         list_posts = new ArrayList<>();
 
         fabPostFunction = v.findViewById(R.id.fabPost);
+        swipeRefreshLayout = v.findViewById(R.id.tweets_refresh_layout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+            }
+        });
+
         fabPostFunction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +144,6 @@ public class HomeFragment extends Fragment{
                                 }
                             }
                         }
-
 
                         id_post = post.getKey();
                         list_posts.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
