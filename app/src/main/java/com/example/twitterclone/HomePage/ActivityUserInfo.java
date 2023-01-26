@@ -1,27 +1,23 @@
 package com.example.twitterclone.HomePage;
 
 import static com.example.twitterclone.HomePage.HomeFragment.ALL_POSTS;
-import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.twitterclone.AdpTweet.AdpTweet;
-import com.example.twitterclone.MainActivity;
 import com.example.twitterclone.ModelUser.ModelUser;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
@@ -36,7 +32,7 @@ public class ActivityUserInfo extends AppCompatActivity {
 
 
     private ImageView ivPhotoUser;
-    private Button btLogout;
+    private ImageButton btnBack;
     private TextView etName, etDesctiption, etUser;
     private ArrayList<TweetModel> users_tweets, lists_retweets;
     private String UID;
@@ -52,7 +48,7 @@ public class ActivityUserInfo extends AppCompatActivity {
         UID = extras.getString("user_UID");
 
         ivPhotoUser = findViewById(R.id.ivProfileUserPic);
-        btLogout = findViewById(R.id.btLogOut);
+        btnBack = findViewById(R.id.btnBack);
 
         etName = findViewById(R.id.profileUserName);
         etUser = findViewById(R.id.profileUser);
@@ -64,7 +60,7 @@ public class ActivityUserInfo extends AppCompatActivity {
         fill_logged_user();
         fill_user_posts();
 
-        btLogout.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

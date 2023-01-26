@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.twitterclone.AdpTweet.AdpComment;
-import com.example.twitterclone.AdpTweet.AdpTweet;
 import com.example.twitterclone.ModelUser.CommentModel;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
@@ -56,7 +55,7 @@ public class CommentActivity extends AppCompatActivity {
         tvUser = findViewById(R.id.tweet_post_user);
         tvLiked = findViewById(R.id.tvAmmountLiked);
         tvRetweeted = findViewById(R.id.tvAmmountRetweet);
-        tvTweet = findViewById(R.id.tweet_post);
+        tvTweet = findViewById(R.id.profileDescription);
         ivProfile = findViewById(R.id.post_profile_user);
         ivImage = findViewById(R.id.tweet_post_image);
         likeButton = findViewById(R.id.likeBtn);

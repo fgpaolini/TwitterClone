@@ -2,6 +2,7 @@ package com.example.twitterclone.HomePage;
 
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
+import com.bumptech.glide.Glide;
 import com.example.twitterclone.AdpTweet.AdpTweet;
 import com.example.twitterclone.AdpTweet.AdpUsers;
+import com.example.twitterclone.MainActivity;
 import com.example.twitterclone.ModelUser.ModelUser;
 import com.example.twitterclone.R;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -28,7 +33,10 @@ import java.util.ArrayList;
 public class SearchFragment extends Fragment {
 
     private EditText etWord;
-    private Button btSearch;
+    private ImageButton btSearch;
+    public static String USER_UID;
+    public static ModelUser LOGGED_USER;
+    private ShapeableImageView searchProfilePic;
     private ArrayList<ModelUser> found_users, all_users;
 
     @Override
@@ -37,7 +45,7 @@ public class SearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
         etWord = v.findViewById(R.id.editTextTextPersonName);
-        btSearch = v.findViewById(R.id.buttonSearch);
+        btSearch = v.findViewById(R.id.ibSearch);
         RecyclerView r = v.findViewById(R.id.recycleView);
 
         found_users = new ArrayList<>();
@@ -66,6 +74,7 @@ public class SearchFragment extends Fragment {
         return v;
     }
 
+
     public void fillUsers(){
         MDATABASE.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -81,12 +90,13 @@ public class SearchFragment extends Fragment {
                         } else if (data_user.getKey().equals("pic")) {
                             found_user.setURL_image(data_user.getValue().toString());
                         } else if (data_user.getKey().equals("user")) {
-                            found_user.setUser(data_user.getValue().toString());
+                            found_user.setUser("@" + data_user.getValue().toString());
                         } else if (data_user.getKey().equals("description")) {
                             found_user.setUser_description(data_user.getValue().toString());
                         }
                     }
                     all_users.add(found_user);
+
                 }
             }
 
@@ -99,7 +109,7 @@ public class SearchFragment extends Fragment {
 
     public void createRecycleViewUsers(@NonNull View v,RecyclerView recyclerView, ArrayList<ModelUser> list_to_show){
         AdpUsers adpShop_adaptor_2 = new AdpUsers(v.getContext(), list_to_show);
-        recyclerView.setLayoutManager(new GridLayoutManager(v.getContext(),2));
+        recyclerView.setLayoutManager(new GridLayoutManager(v.getContext(),1));
         recyclerView.setAdapter(adpShop_adaptor_2);
     }
 

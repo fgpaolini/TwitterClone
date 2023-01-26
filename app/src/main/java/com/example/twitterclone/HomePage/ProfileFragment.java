@@ -31,7 +31,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -60,7 +59,7 @@ public class ProfileFragment extends Fragment {
     private Button btLogout, btChangeName, btChangeProfile;
 
     private ToggleButton btEditProfile;
-    private ImageButton ibChangePic;
+    private ImageButton ibChangePic, nameEditPencil, userEditPencil, descriptionEditPencil;
     private TextView etName, etDesctiption, etUser;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private ArrayList<TweetModel> my_tweets, lists_retweets;
@@ -79,10 +78,13 @@ public class ProfileFragment extends Fragment {
         ivPhotoUser = v.findViewById(R.id.ivProfileUserPic);
         btEditProfile = v.findViewById(R.id.editProfileBtn);
         ibChangePic = v.findViewById(R.id.changePicImBtn);
-        btLogout = v.findViewById(R.id.btLogOut);
+        btLogout = v.findViewById(R.id.btnBack);
         btChangeName = v.findViewById(R.id.btChangeUserName);
         btChangeProfile = v.findViewById(R.id.btChangeUserDescription);
         postsTab = v.findViewById(R.id.postsTab);
+
+        nameEditPencil = v.findViewById(R.id.namePencil);
+        descriptionEditPencil = v.findViewById(R.id.descriptionPencil);
 
         etName = v.findViewById(R.id.profileUserName);
         etUser = v.findViewById(R.id.profileUser);
@@ -143,6 +145,8 @@ public class ProfileFragment extends Fragment {
                 // The toggle is enabled
 
                 ibChangePic.setVisibility(View.VISIBLE);
+                nameEditPencil.setVisibility(View.VISIBLE);
+                descriptionEditPencil.setVisibility(View.VISIBLE);
                 ivPhotoUser.setStrokeWidth(10);
                 ivPhotoUser.setStrokeColor(ColorStateList.valueOf(ContextCompat.getColor(this.getContext(), R.color.black)));
 
@@ -150,6 +154,8 @@ public class ProfileFragment extends Fragment {
             } else {
                 // The toggle is disabled
                 ibChangePic.setVisibility(View.GONE);
+                nameEditPencil.setVisibility(View.GONE);
+                descriptionEditPencil.setVisibility(View.GONE);
                 ivPhotoUser.setStrokeWidth(0);
 
             }
@@ -167,7 +173,7 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        btChangeName.setOnClickListener(new View.OnClickListener() {
+        nameEditPencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -233,7 +239,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        btChangeProfile.setOnClickListener(new View.OnClickListener() {
+        descriptionEditPencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

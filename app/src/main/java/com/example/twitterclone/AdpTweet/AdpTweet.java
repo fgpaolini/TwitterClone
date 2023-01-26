@@ -3,17 +3,14 @@ package com.example.twitterclone.AdpTweet;
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,11 +24,6 @@ import com.example.twitterclone.HomePage.CommentActivity;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -82,7 +74,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvUser = itemView.findViewById(R.id.tweet_post_user);
             tvLiked = itemView.findViewById(R.id.tvAmmountLiked);
             tvRetweeted = itemView.findViewById(R.id.tvAmmountRetweet);
-            tvTweet = itemView.findViewById(R.id.tweet_post);
+            tvTweet = itemView.findViewById(R.id.profileDescription);
             tvTTime = itemView.findViewById(R.id.tvTweetTime);
             ivProfile = itemView.findViewById(R.id.post_profile_user);
             ivImage = itemView.findViewById(R.id.tweet_post_image);

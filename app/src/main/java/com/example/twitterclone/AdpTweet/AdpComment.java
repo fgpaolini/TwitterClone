@@ -20,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.twitterclone.HomePage.ActivityUserInfo;
 import com.example.twitterclone.ModelUser.CommentModel;
-import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
 
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             tvName = itemView.findViewById(R.id.tweet_post_name);
-            tvComment = itemView.findViewById(R.id.tweet_post);
+            tvComment = itemView.findViewById(R.id.profileDescription);
             ivProfile = itemView.findViewById(R.id.post_profile_user);
             likeButton = itemView.findViewById(R.id.likeBtn);
         }

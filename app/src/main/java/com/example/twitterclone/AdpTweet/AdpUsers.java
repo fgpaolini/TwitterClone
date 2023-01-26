@@ -67,8 +67,10 @@ public class AdpUsers extends RecyclerView.Adapter<AdpUsers.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvUserName;
+        TextView tvName, tvUserName, userDescription;
         ImageView ivProfile;
+
+
 
         //Recogera componentes del layout
         public ViewHolder(@NonNull View itemView){
@@ -76,12 +78,14 @@ public class AdpUsers extends RecyclerView.Adapter<AdpUsers.ViewHolder> {
             tvName = itemView.findViewById(R.id.user_name);
             tvUserName = itemView.findViewById(R.id.user_name_2);
             ivProfile = itemView.findViewById(R.id.post_search_user_image);
+            userDescription = itemView.findViewById(R.id.profileDescription);
         }
 
         //Pondra la informacion al objeto
         public void bindData(@NonNull ModelUser user){
             tvName.setText(user.getName());
             tvUserName.setText(user.getUser());
+            userDescription.setText(user.getUser_description());
             Uri profile_photo = Uri.parse(user.getURL_image());
             Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
         }

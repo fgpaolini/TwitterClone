@@ -2,29 +2,22 @@ package com.example.twitterclone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.twitterclone.HomePage.PostActivity;
 import com.example.twitterclone.HomePage.SearchFragment;
 import com.example.twitterclone.databinding.ActivityMainBinding;
 import com.example.twitterclone.HomePage.HomeFragment;
-import com.example.twitterclone.HomePage.PostFragment;
 import com.example.twitterclone.HomePage.ProfileFragment;
 import com.example.twitterclone.ModelUser.ModelUser;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -105,7 +98,7 @@ public class MainActivity extends AppCompatActivity{
                     }
                 }
                 LOGGED_USER.setUID(USER_UID);
-                profile = findViewById(R.id.mainProfileActivity);
+                profile = findViewById(R.id.searchProfilePic);
                 Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
                 Glide.with(MainActivity.this).load(String.valueOf(profile_photo)).into(profile);
             }
