@@ -19,8 +19,10 @@
             android:id="@+id/btCancel"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight=".2"
             android:background="@android:color/transparent"
+            android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:text="Volver"
             app:icon="@drawable/ic_back"
@@ -122,7 +124,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:fontFamily="@font/chirp_bold"
                                 android:text="Fernando"
+                                android:textColor="@color/notSoBlack"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@+id/post_profile_user"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -132,7 +136,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
+                                android:fontFamily="@font/chirp_medium"
                                 android:text="&quot;@PaoliniFerg&quot;"
+                                android:textColor="@color/colorgGainsboro"
                                 app:layout_constraintStart_toEndOf="@+id/tweet_post_name"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -162,8 +168,10 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_marginRight="5dp"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/chirp_regular"
                                 android:maxLength="280"
                                 android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat ma."
+                                android:textColor="@color/notSoBlack"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/post_profile_user"
                                 app:layout_constraintTop_toBottomOf="@+id/tweet_post_name" />

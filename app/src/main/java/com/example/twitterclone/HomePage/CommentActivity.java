@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class CommentActivity extends AppCompatActivity {
 
     private TextView tvName, tvUser, tvTweet, tvLiked, tvRetweeted;
-    private ImageView ivProfile,ivImage;
+    private ImageView ivProfile,ivImage, ivProfileLoggedUser;
     private CheckBox likeButton, retweetButton;
     private String post_id;
     private ArrayList<CommentModel> list_comments;
@@ -57,6 +57,7 @@ public class CommentActivity extends AppCompatActivity {
         tvRetweeted = findViewById(R.id.tvAmmountRetweet);
         tvTweet = findViewById(R.id.profileDescription);
         ivProfile = findViewById(R.id.post_profile_user);
+        ivProfileLoggedUser = findViewById(R.id.post_profile_userCommenting);
         ivImage = findViewById(R.id.tweet_post_image);
         likeButton = findViewById(R.id.likeBtn);
         btCommentar = findViewById(R.id.btCommentarEnviar);
@@ -139,6 +140,11 @@ public class CommentActivity extends AppCompatActivity {
                         tvTweet.setText(main_tweet.getContent_post());
                         Uri profile_photo = Uri.parse(main_tweet.getUser_url_profile());
                         Glide.with(CommentActivity.this).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
+
+                        Uri profile_photo_logged_user = Uri.parse(LOGGED_USER.getURL_image());
+
+                        Glide.with(CommentActivity.this).load(String.valueOf(profile_photo_logged_user)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfileLoggedUser);
+
                         if(!main_tweet.getImage_url().equals("")){
                             Uri post_photo = Uri.parse(image_url);
                             Glide.with(CommentActivity.this).load(String.valueOf(post_photo)).into(ivImage);

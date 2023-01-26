@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.twitterclone.HomePage.NotifFragment;
 import com.example.twitterclone.HomePage.SearchFragment;
 import com.example.twitterclone.databinding.ActivityMainBinding;
 import com.example.twitterclone.HomePage.HomeFragment;
@@ -70,6 +71,12 @@ public class MainActivity extends AppCompatActivity{
                     replaceFragment(new SearchFragment());
                     binding.linearLayoutBar.setVisibility(View.GONE);
                     break;
+
+                case R.id.notif_fragment:
+                    binding.linearLayoutBar.setVisibility(View.VISIBLE);
+                    replaceFragment(new NotifFragment());
+                    break;
+
                 case R.id.profile_fragment:
                     replaceFragment(new ProfileFragment());
                     binding.linearLayoutBar.setVisibility(View.GONE);
