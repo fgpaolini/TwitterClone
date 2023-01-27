@@ -268,9 +268,7 @@
                             android:elegantTextHeight="false"
                             android:gravity="center"
                             android:includeFontPadding="false"
-                            android:text="1"
                             android:textSize="14sp"
-                            android:visibility="gone"
                             app:layout_constraintStart_toEndOf="@+id/likeBtn" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -30,6 +30,9 @@
 
     </style>
 
+    <style name="whiteButton" parent="">
+        <item name="android:background">@drawable/custom_white_button</item>
+    </style>
 
     <style name="rondedButton" parent="">
         <item name="selectableItemBackground">@drawable/btn_round_blue</item>
