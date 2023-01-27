@@ -110,22 +110,23 @@
                     android:id="@+id/tweet_post_image"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
+                    android:layout_marginVertical="10dp"
                     android:layout_marginLeft="55dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
                     android:scaleType="centerCrop"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profileDescription"
-                    app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
+                    app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+                    tools:srcCompat="@drawable/test_post_image" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="16dp"
                 android:layout_marginLeft="55dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
@@ -133,7 +134,7 @@
 
                 <LinearLayout
                     android:id="@+id/commentLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -141,6 +142,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1">
 
                         <ImageView
@@ -153,17 +155,19 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/twitter_reply_outline" />
+                            app:srcCompat="@drawable/ic_twitter_reply_outline" />
 
                         <TextView
                             android:id="@+id/textCountComments"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
-                            android:layout_marginLeft="2dp"
+                            android:layout_marginLeft="4dp"
                             android:layout_weight="1"
+                            android:elegantTextHeight="false"
                             android:gravity="center"
+                            android:includeFontPadding="false"
                             android:text="1"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/commentBtn"
@@ -173,48 +177,10 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/favLayout"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rtLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <CheckBox
-                            android:id="@+id/rtBtn"
-                            android:layout_width="20dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:button="@drawable/retweet_checkbox"
-                            android:elegantTextHeight="true"
-                            android:gravity="left|center_vertical"
-                            android:textAlignment="gravity"
-                            android:textSize="12sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            tools:layout_editor_absoluteY="0dp" />
-
-                        <TextView
-                            android:id="@+id/tvAmmountRetweet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:elegantTextHeight="false"
-                            android:gravity="center"
-                            android:text="1"
-                            android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/rtBtn" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -225,28 +191,78 @@
                         android:layout_weight="1">
 
                         <CheckBox
-                            android:id="@+id/likeBtn"
-                            style="null"
+                            android:id="@+id/rtBtn"
+                            style="@style/rtButtonStyle"
                             android:layout_width="20dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:button="@drawable/like_checkbox"
+                            android:button="@android:color/transparent"
+                            android:elegantTextHeight="true"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAmmountRetweet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="1"
+                            android:elegantTextHeight="false"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="1"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toEndOf="@+id/rtBtn" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/likeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <CheckBox
+                            android:id="@+id/likeBtn"
+                            style="@style/likeButtonStyle"
+                            android:layout_width="16dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
                             android:elegantTextHeight="false"
                             android:gravity="center"
                             android:textAlignment="gravity"
                             android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/tvAmmountLiked"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
                             android:layout_weight="1"
                             android:elegantTextHeight="false"
-                            android:gravity="center|left"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
                             android:text="1"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             app:layout_constraintStart_toEndOf="@+id/likeBtn" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -263,7 +279,6 @@
 
 
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

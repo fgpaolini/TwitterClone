@@ -20,6 +20,17 @@
         <item name="cornerSize">15dp</item>
     </style>
 
+    <style name="likeButtonStyle" parent="">
+        <item name="android:background">@drawable/like_checkbox</item>
+
+    </style>
+
+    <style name="rtButtonStyle" parent="">
+        <item name="android:background">@drawable/retweet_checkbox</item>
+
+    </style>
+
+
     <style name="rondedButton" parent="">
         <item name="selectableItemBackground">@drawable/btn_round_blue</item>
     </style>
