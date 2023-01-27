@@ -11,13 +11,16 @@
         android:id="@+id/buttonDismissAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Volver" />
+        android:layout_gravity="left"
+        android:background="@android:color/transparent"
+        app:icon="@drawable/ic_back"
+        app:iconTint="@color/twitterBlue" />
 
     <ImageView
         android:id="@+id/imageBigger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         tools:srcCompat="@tools:sample/avatars" />
 
 </LinearLayout>
