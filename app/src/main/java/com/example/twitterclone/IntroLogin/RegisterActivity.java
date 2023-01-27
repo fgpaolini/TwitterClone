@@ -159,7 +159,8 @@ public class RegisterActivity extends AppCompatActivity {
                         mDatabase.child("User").child(uid).child("name").setValue(name);
                         mDatabase.child("User").child(uid).child("email").setValue(mail);
                         mDatabase.child("User").child(uid).child("user").setValue(user);
-                        mDatabase.child("User").child(uid).child("description").setValue("Soy una descripcion predeterminada");
+                        mDatabase.child("User").child(uid).child("user").setValue(user);
+                        mDatabase.child("User").child(uid).child("isVerified").setValue(false);
 
                         StorageReference ubicacionImagen = mStorage.child("User").child(uid).child("profile.png");
                         Uri imageUri = Uri.parse("android.resource://" + RegisterActivity.this.getPackageName() + "/" + R.drawable.ic_debug_user);

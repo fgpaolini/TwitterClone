@@ -160,7 +160,6 @@
                             android:id="@+id/profileUserName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableEnd="@drawable/ic_twitter_verified"
                             android:drawablePadding="4dp"
                             android:fontFamily="@font/chirp_bold"
                             android:paddingTop="5dp"

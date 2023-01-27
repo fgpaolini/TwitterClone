@@ -8,14 +8,24 @@ public class ModelUser {
     private String UID;
     private String URL_image;
     private String user_description;
+    private boolean isVerified;
 
-    public ModelUser(String name, String user, String mail, String UID, String URL_image, String user_description) {
+    public ModelUser(String name, String user, String mail, boolean isVerified,  String UID, String URL_image, String user_description) {
         this.name = name;
         this.user = user;
         this.mail = mail;
+        this.isVerified = isVerified;
         this.UID = UID;
         this.URL_image = URL_image;
         this.user_description = user_description;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 
     public String getName() {

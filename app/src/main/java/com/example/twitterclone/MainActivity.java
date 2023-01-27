@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void fill_logged_user() {
-        LOGGED_USER = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", "NO_UID", "NO_URL","NO_DESCRIPTION");
+        LOGGED_USER = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", false,"NO_UID", "NO_URL","NO_DESCRIPTION");
         MDATABASE.child("User").child(USER_UID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity{
                         LOGGED_USER.setName(data.getValue().toString());
                     } else if (data.getKey().equals("email")) {
                         LOGGED_USER.setMail(data.getValue().toString());
+                    } else if (data.getKey().equals("isVerified")) {
+                        LOGGED_USER.setVerified((Boolean) data.getValue());
                     } else if (data.getKey().equals("pic")) {
                         LOGGED_USER.setURL_image(data.getValue().toString());
                     } else if (data.getKey().equals("user")) {

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -104,8 +105,19 @@ public class ProfileFragment extends Fragment {
         Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
         Glide.with(ProfileFragment.this).load(String.valueOf(profile_photo)).into(ivPhotoUser);
         etName.setText(LOGGED_USER.getName());
+
+        if (LOGGED_USER.isVerified()) {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_twitter_verified);
+            img.setBounds(0, 0, 50, 50);
+            etName.setCompoundDrawables(null, null, img, null);
+
+        } else {
+
+            etName.setCompoundDrawables(null, null, null, null);
+        }
+
         etUser.setText("@" + LOGGED_USER.getUser());
-        etDesctiption.setText("Bio" + LOGGED_USER.getUser_description());
+        etDesctiption.setText("Bio: " + LOGGED_USER.getUser_description());
 
         //Necesario para busqueda de imagenes
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {

@@ -80,13 +80,15 @@ public class SearchFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot user: snapshot.getChildren()){
-                    ModelUser found_user = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", "NO_UID", "NO_URL","NO_DESCRIPTION");
+                    ModelUser found_user = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", false, "NO_UID", "NO_URL","NO_DESCRIPTION");
                     found_user.setUID(user.getKey());
                     for(DataSnapshot data_user: user.getChildren()){
                         if (data_user.getKey().equals("name")) {
                             found_user.setName(data_user.getValue().toString());
                         } else if (data_user.getKey().equals("email")) {
                             found_user.setMail(data_user.getValue().toString());
+                        } else if (data_user.getKey().equals("isVerified")) {
+                            found_user.setVerified((Boolean) data_user.getValue());
                         } else if (data_user.getKey().equals("pic")) {
                             found_user.setURL_image(data_user.getValue().toString());
                         } else if (data_user.getKey().equals("user")) {
@@ -99,7 +101,6 @@ public class SearchFragment extends Fragment {
 
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

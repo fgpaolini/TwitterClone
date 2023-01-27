@@ -1,6 +1,7 @@
 package com.example.twitterclone.HomePage;
 
 import static com.example.twitterclone.HomePage.HomeFragment.ALL_POSTS;
+import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -91,7 +93,7 @@ public class ActivityUserInfo extends AppCompatActivity {
     }
 
     public void fill_logged_user() {
-        user = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", "NO_UID", "NO_URL","NO_DESCRIPTION");
+        user = new ModelUser("NO_NAME", "NO_USER", "NO_MAIL", false,"NO_UID", "NO_URL","NO_DESCRIPTION");
         MDATABASE.child("User").child(UID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -103,6 +105,8 @@ public class ActivityUserInfo extends AppCompatActivity {
                         user.setName(data.getValue().toString());
                     } else if (data.getKey().equals("email")) {
                         user.setMail(data.getValue().toString());
+                    } else if (data.getKey().equals("isVerified")) {
+                        user.setVerified((Boolean) data.getValue());
                     } else if (data.getKey().equals("pic")) {
                         user.setURL_image(data.getValue().toString());
                     } else if (data.getKey().equals("user")) {
@@ -117,6 +121,15 @@ public class ActivityUserInfo extends AppCompatActivity {
                 etUser.setText("@" + user.getUser());
                 etDesctiption.setText("Bio: " + user.getUser_description());
 
+                if (user.isVerified()) {
+                    Drawable img = getResources().getDrawable(R.drawable.ic_twitter_verified);
+                    img.setBounds(0, 0, 50, 50);
+                    etName.setCompoundDrawables(null, null, img, null);
+
+                } else {
+
+                    etName.setCompoundDrawables(null, null, null, null);
+                }
                 fillRetweetPost();
             }
 

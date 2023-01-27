@@ -119,25 +119,82 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/profileUserName"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/linearLayout8"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="5dp"
-                        android:text="Fernando"
-                        android:textSize="20sp" />
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="2dp">
 
-                    <TextView
-                        android:id="@+id/profileUser"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="PaoliniFerg" />
+                        <TextView
+                            android:id="@+id/profileUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="4dp"
+                            android:fontFamily="@font/chirp_bold"
+                            android:paddingTop="5dp"
+                            android:text="Fernando"
+                            android:textColor="@color/notSoBlack"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/profileDescription"
+                        <ImageButton
+                            android:id="@+id/namePencil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_edit"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Some dream of fire, to help keep winter at bay." />
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="2dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/profileUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".8"
+                            android:fontFamily="@font/chirp_medium"
+                            android:text="PaoliniFerg"
+                            android:textColor="@color/colorgGainsboro" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="2dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/profileDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight=".8"
+                            android:fontFamily="@font/chirp_light"
+                            android:text="Some dream of fire, to help keep winter at bay."
+                            android:textColor="@color/notSoBlack" />
+
+                        <ImageButton
+                            android:id="@+id/descriptionPencil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".28"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_edit"
+                            android:visibility="gone" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -41,8 +41,6 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);;
         this.list_post = list_post;
-
-
     }
 
     @NonNull
@@ -64,7 +62,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvName, tvUser, tvTweet, tvCountComment, tvTTime, tvLiked, tvRetweeted;
-        ImageView ivProfile, commentButton;
+        ImageView ivProfile, commentButton, verifiedCheck;
 
         ShapeableImageView ivImage;
         CheckBox likeButton, retweetButton;
@@ -86,6 +84,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvCountComment = itemView.findViewById(R.id.textCountComments);
             cardLayout = itemView.findViewById(R.id.cardViewTweet);
             retweetButton = itemView.findViewById(R.id.rtBtn);
+            verifiedCheck = itemView.findViewById(R.id.verifiedMark);
         }
 
         //Pondra la informacion al objeto
@@ -100,6 +99,7 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             tvUser.setText("@" + tweet.getUser_poster());
             tvTweet.setText(tweet.getContent_post());
             tvTTime.setText(post_time);
+
 
             //Volver a poner el foto
             Uri profile_photo = Uri.parse(tweet.getUser_url_profile());
