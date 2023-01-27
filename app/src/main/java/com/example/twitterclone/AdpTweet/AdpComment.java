@@ -71,7 +71,7 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
         //Pondra la informacion al objeto
         public void bindData(@NonNull CommentModel comments){
             tvName.setText(comments.getComment_user_name());
-            tvUser.setText(comments.getComment_user_arroba());
+            tvUser.setText("@" + comments.getComment_user_arroba());
             tvComment.setText(comments.getUser_comment());
             Uri profile_photo = Uri.parse(comments.getUser_photo_url());
             Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);

@@ -138,7 +138,7 @@ public class CommentActivity extends AppCompatActivity {
 
                         //Post pricipal a comentar rellenar
                         tvName.setText(main_tweet.getUser_poster());
-                        tvUser.setText(main_tweet.getUser_poster());
+                        tvUser.setText("@" + main_tweet.getUser_poster());
                         tvTweet.setText(main_tweet.getContent_post());
                         Uri profile_photo = Uri.parse(main_tweet.getUser_url_profile());
                         Glide.with(CommentActivity.this).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
