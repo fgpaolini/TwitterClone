@@ -48,6 +48,9 @@
     <string name="changeNameHint">Cambiar nombre</string>
     <string name="changeName">Nombre</string>
     <string name="changedName">Nombre cambiado</string>
+    <string name="editName">Editar</string>
+    <string name="changeBioTitle">Cambiar bio</string>
+    <string name="changeBioHint">Bio</string>
     <string name="emptyBio">La bio no puede estar vacía</string>
     <string name="fiftyBio">No puede haber mas de 50 caracteres</string>
     <string name="bioChanged">Bio cambiada</string>

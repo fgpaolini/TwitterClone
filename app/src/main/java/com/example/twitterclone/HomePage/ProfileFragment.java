@@ -300,9 +300,9 @@ public class ProfileFragment extends Fragment {
                 Button btChange;
 
                 tvChangeTitle = v.findViewById(R.id.titleChange);
-                tvChangeTitle.setText("Cambiar descripcion");
+                tvChangeTitle.setText(getResources().getString(R.string.changeBioTitle));
                 etChange = v.findViewById(R.id.etNameToChange);
-                etChange.setHint("Descripcion");
+                etChange.setHint(getResources().getString(R.string.changeBioHint));
                 btChange = v.findViewById(R.id.btChangeNameDatabase);
 
                 btChange.setOnClickListener(new View.OnClickListener() {

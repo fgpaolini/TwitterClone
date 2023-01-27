@@ -8,21 +8,21 @@
         android:id="@+id/titleChange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20dp"
         android:padding="10dp"
-        android:text="Cambiar de nombre" />
+        android:text="@string/changeNameHint"
+        android:textAlignment="center"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/etNameToChange"
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:padding="10dp"
         android:layout_marginHorizontal="10dp"
+        android:ems="10"
+        android:hint="@string/changeName"
         android:inputType="textPersonName"
-        android:hint="Nombre" />
+        android:padding="10dp"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/btChangeNameDatabase"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:text="Cambiar" />
+        android:text="@string/editName" />
 
 
 </LinearLayout>
