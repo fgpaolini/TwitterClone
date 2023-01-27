@@ -17,6 +17,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -192,6 +193,8 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     else{
                         loading_dialog.dismiss();
                         finish();
+                        final MediaPlayer mediaPlayer = MediaPlayer.create(PostActivity.this, R.raw.twitter_notif_sound);
+                        mediaPlayer.start();
                         Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
                     }
 

@@ -3,6 +3,7 @@ package com.example.twitterclone.HomePage;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,11 @@ public class HomeFragment extends Fragment{
                 createRecycleProductsA(v, list_posts);
                 fillPost(v);
                 swipeRefreshLayout.setRefreshing(false);
+
+                final MediaPlayer mediaPlayer = MediaPlayer.create(HomeFragment.this.getContext(), R.raw.twitter_scroll_sound_edit);
+                mediaPlayer.start();
+
+
             }
         });
 
