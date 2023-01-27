@@ -10,7 +10,7 @@
     <string name="etEmail">Correo</string>
     <string name="etPassword">Contraseña</string>
     <string name="buttonLogin">Inicia sesión</string>
-    <string name="tvDontHaveAcc">No tienes una cuenta?</string>
+    <string name="tvDontHaveAcc">¿No tienes una cuenta?</string>
     <string name="tvJoin">Regístrate</string>
     <string name="title_activity_register">RegisterActivity</string>
     <!-- Strings used for LoginActivity Error Messages -->
