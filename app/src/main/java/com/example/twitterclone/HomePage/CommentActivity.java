@@ -291,6 +291,7 @@ public class CommentActivity extends AppCompatActivity {
                     list_comments.add(new CommentModel(post_id, "comment"+number_comments, LOGGED_USER.getUID(), LOGGED_USER.getName(), LOGGED_USER.getUser(), comentario, LOGGED_USER.getURL_image(), nueva_lista_meGusta));
                     etTextoCommentar.setText("");
                     Toast.makeText(CommentActivity.this, "Comentado!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
             }

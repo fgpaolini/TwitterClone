@@ -68,7 +68,10 @@ public class ProfileFragment extends Fragment {
 
     private TimeAdapter tweetTimeAdp;
 
+    private RecyclerView recyclerViewPopular;
     private TabLayout postsTab;
+    private String changed_name;
+    private Boolean changed_new_name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +86,7 @@ public class ProfileFragment extends Fragment {
         btChangeProfile = v.findViewById(R.id.btChangeUserDescription);
         postsTab = v.findViewById(R.id.postsTab);
         settingButton = v.findViewById(R.id.settingImageButton);
+        recyclerViewPopular = v.findViewById(R.id.rvProfileTweets);
 
         nameEditPencil = v.findViewById(R.id.namePencil);
         descriptionEditPencil = v.findViewById(R.id.descriptionPencil);
@@ -95,6 +99,7 @@ public class ProfileFragment extends Fragment {
         currentTime = System.currentTimeMillis();
         my_tweets = new ArrayList<>();
         lists_retweets = new ArrayList<>();
+        changed_new_name = false;
 
         Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
         Glide.with(ProfileFragment.this).load(String.valueOf(profile_photo)).into(ivPhotoUser);
@@ -247,7 +252,11 @@ public class ProfileFragment extends Fragment {
                             }
                         });
 
-
+                        etName.setText(new_name);
+                        changed_name = new_name;
+                        changed_new_name = true;
+                        my_tweets = new ArrayList<>();
+                        fillUsersPost(v, recyclerViewPopular);
                         Toast.makeText(ProfileFragment.this.getContext(), "Nombre cambiado", Toast.LENGTH_SHORT).show();
                         change_name_dialog.dismiss();
                     }
@@ -300,22 +309,23 @@ public class ProfileFragment extends Fragment {
                         MDATABASE.child("User").child(LOGGED_USER.getUID()).child("description").setValue(new_description);
 
                         Toast.makeText(ProfileFragment.this.getContext(), "Descripcion cambiado", Toast.LENGTH_SHORT).show();
+                        etDesctiption.setText(new_description);
                         change_name_dialog.dismiss();
                     }
                 });
             }
         });
 
-        fillUsersPost(v);
+        fillUsersPost(v, recyclerViewPopular);
         fillRetweetPost();
 
         postsTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition() == 0){
-                    createRecycleViewMyTweets(v, my_tweets);
+                    createRecycleViewMyTweets(v, recyclerViewPopular, my_tweets);
                 } else if (tab.getPosition() == 1) {
-                    createRecycleViewMyTweets(v, lists_retweets);
+                    createRecycleViewMyTweets(v,recyclerViewPopular, lists_retweets);
                 }
             }
 
@@ -334,11 +344,10 @@ public class ProfileFragment extends Fragment {
         return v;
     }
 
-    public void createRecycleViewMyTweets(@NonNull View v, ArrayList<TweetModel> list_to_show){
+    public void createRecycleViewMyTweets(@NonNull View v, RecyclerView r, ArrayList<TweetModel> list_to_show){
         AdpTweet adpShop_adaptor_2 = new AdpTweet(v.getContext(), list_to_show);
-        RecyclerView recyclerViewPopular = v.findViewById(R.id.rvProfileTweets);
-        recyclerViewPopular.setLayoutManager(new GridLayoutManager(v.getContext(),1));
-        recyclerViewPopular.setAdapter(adpShop_adaptor_2);
+        r.setLayoutManager(new GridLayoutManager(v.getContext(),1));
+        r.setAdapter(adpShop_adaptor_2);
     }
 
     //Creas en el Firebase Storage un nuevo imagen
@@ -364,7 +373,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public void fillUsersPost(View v){
+    public void fillUsersPost(View v, RecyclerView recyclerViewPopular){
         MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -437,16 +446,24 @@ public class ProfileFragment extends Fragment {
 
 
                         }
-                        if(user_uid.equals(LOGGED_USER.getUID())){
-
-                            id_post = post.getKey();
-                            my_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
+                        if(changed_new_name){
+                            if(user_uid.equals(LOGGED_USER.getUID())){
+                                id_post = post.getKey();
+                                my_tweets.add(new TweetModel(id_post, user_poster, changed_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
+                            }
+                        }
+                        else if(!changed_new_name){
+                            if(user_uid.equals(LOGGED_USER.getUID())){
+                                id_post = post.getKey();
+                                my_tweets.add(new TweetModel(id_post, user_poster, user_name, user_uid, post_time, content_post, image_url, user_url_profile, users_liked, number_comments, users_retweet));
+                            }
                         }
                     }
 
                 }
 
-                createRecycleViewMyTweets(v, my_tweets);
+                changed_new_name = false;
+                createRecycleViewMyTweets(v,recyclerViewPopular, my_tweets);
 
             }
 
