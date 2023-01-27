@@ -3,12 +3,14 @@ package com.example.twitterclone.AdpTweet;
 import static com.example.twitterclone.MainActivity.LOGGED_USER;
 import static com.example.twitterclone.MainActivity.MDATABASE;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.twitterclone.HomePage.ActivityUserInfo;
 import com.example.twitterclone.HomePage.CommentActivity;
+import com.example.twitterclone.HomePage.ProfileFragment;
 import com.example.twitterclone.ModelUser.TweetModel;
 import com.example.twitterclone.R;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -112,7 +115,10 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
             if(!tweet.getImage_url().equals("")){
                 ivImage.setVisibility(itemView.VISIBLE);
                 Uri post_photo = Uri.parse(tweet.getImage_url());
-                Glide.with(itemView).load(String.valueOf(post_photo)).into(ivImage);
+                Glide.with(itemView).load(String.valueOf(post_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivImage);
+            }
+            else{
+                ivImage.setVisibility(itemView.GONE);
             }
 
             if(tweet.getUsers_liked().size() == 0){
@@ -241,7 +247,40 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 }
             });
 
+            ivImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Preparar la pantalla de carga
+                    AlertDialog change_name_dialog;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setCancelable(false);
 
+                    //Preparar para agregar el layout
+                    LayoutInflater inflater = LayoutInflater.from(v.getContext());
+                    v = inflater.inflate(R.layout.alert_image, null);
+
+                    //Configurando el layout en el view
+                    builder.setView(v);
+                    change_name_dialog = builder.create();
+
+                    change_name_dialog.show();
+
+                    Button btDismiss = v.findViewById(R.id.buttonDismissAlert);
+                    ImageView imageBigger = v.findViewById(R.id.imageBigger);
+
+                    Uri profile_photo = Uri.parse(tweet.getImage_url());
+                    Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(imageBigger);
+
+                    btDismiss.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            change_name_dialog.dismiss();
+                        }
+                    });
+
+
+                }
+            });
         }
     }
 }

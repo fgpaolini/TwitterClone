@@ -29,13 +29,10 @@ public class TimeAdapter {
 
     public ZonedDateTime tweetTime() {
 
-
-            long epochTweetTime = Long.parseLong(tweetTimeString);
-
-
+        long epochTweetTime = Long.parseLong(tweetTimeString);
         tweetTime = Instant.ofEpochMilli(epochTweetTime).atZone(ZoneId.of("Europe/Madrid"));
-
         return tweetTime;
+
     }
 
     public ZonedDateTime getCurrentDateTime() {

@@ -120,7 +120,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/profileDescription"
                     app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
