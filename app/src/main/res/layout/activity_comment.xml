@@ -291,7 +291,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:weightSum="1">
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -307,15 +307,18 @@
 
                 <EditText
                     android:id="@+id/etCommentar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginRight="20dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:hint="Twittea tu respuesta"
-                    android:inputType="textPersonName"
+                    android:inputType="textMultiLine|textPersonName|textImeMultiLine"
+                    android:singleLine="false"
                     android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/post_profile_userCommenting"
                     app:layout_constraintTop_toTopOf="parent" />
 

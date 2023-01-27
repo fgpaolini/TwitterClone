@@ -9,11 +9,16 @@ public class CommentModel {
     private String user_comment;
     private String user_uid;
     private String user_photo_url;
+    private String comment_user_name;
+
+    private String comment_user_arroba;
     private ArrayList<String> liked_users_comment;
 
-    public CommentModel(String main_post_id, String comment_id, String user_uid, String user_comment, String user_photo_url, ArrayList<String> liked_users_comment) {
+    public CommentModel(String main_post_id, String comment_id, String user_uid, String comment_user_name, String comment_user_arroba, String user_comment, String user_photo_url, ArrayList<String> liked_users_comment) {
         this.comment_id = comment_id;
         this.user_comment = user_comment;
+        this.comment_user_name = comment_user_name;
+        this.comment_user_arroba = comment_user_arroba;
         this.user_photo_url = user_photo_url;
         this.liked_users_comment = liked_users_comment;
         this.user_uid = user_uid;
@@ -30,6 +35,22 @@ public class CommentModel {
 
     public String getUser_uid() {
         return user_uid;
+    }
+
+    public String getComment_user_name() {
+        return comment_user_name;
+    }
+
+    public void setComment_user_name(String comment_user_name) {
+        this.comment_user_name = comment_user_name;
+    }
+
+    public String getComment_user_arroba() {
+        return comment_user_arroba;
+    }
+
+    public void setComment_user_arroba(String comment_user_arroba) {
+        this.comment_user_arroba = comment_user_arroba;
     }
 
     public void setUser_uid(String user_uid) {

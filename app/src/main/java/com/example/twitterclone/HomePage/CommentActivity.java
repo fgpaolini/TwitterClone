@@ -80,6 +80,7 @@ public class CommentActivity extends AppCompatActivity {
                         String user_name = "";
                         String user_uid = "";
                         String content_post = "";
+                        String comment_user_name = "";
                         String post_time = "";
                         String image_url = "";
                         ArrayList<String> users_liked = new ArrayList<>();
@@ -93,6 +94,7 @@ public class CommentActivity extends AppCompatActivity {
 
                             else if (data.getKey().equals("name")) {
                                 user_name = data.getValue().toString();
+                                comment_user_name = data.getValue().toString();
                             }
                             else if (data.getKey().equals("UID")) {
                                 user_uid = data.getValue().toString();
@@ -282,9 +284,11 @@ public class CommentActivity extends AppCompatActivity {
                     MDATABASE.child("Posts").child(post_id).child("comments").child("comment"+number_comments).child("comment_text").setValue(comentario);
                     MDATABASE.child("Posts").child(post_id).child("comments").child("comment"+number_comments).child("pic").setValue(LOGGED_USER.getURL_image());
                     MDATABASE.child("Posts").child(post_id).child("comments").child("comment"+number_comments).child("user_comment").setValue(LOGGED_USER.getUID());
+                    MDATABASE.child("Posts").child(post_id).child("comments").child("comment"+number_comments).child("comment_user_name").setValue(LOGGED_USER.getName());
+                    MDATABASE.child("Posts").child(post_id).child("comments").child("comment"+number_comments).child("comment_user_arroba").setValue(LOGGED_USER.getUser());
                     MDATABASE.child("Posts").child(post_id).child("comments").child("count_comments").setValue(number_comments);
                     ArrayList<String> nueva_lista_meGusta = new ArrayList<>();
-                    list_comments.add(new CommentModel(post_id, "comment"+number_comments, LOGGED_USER.getUID(), comentario, LOGGED_USER.getURL_image(), nueva_lista_meGusta));
+                    list_comments.add(new CommentModel(post_id, "comment"+number_comments, LOGGED_USER.getUID(), LOGGED_USER.getName(), LOGGED_USER.getUser(), comentario, LOGGED_USER.getURL_image(), nueva_lista_meGusta));
                     etTextoCommentar.setText("");
                     Toast.makeText(CommentActivity.this, "Comentado!", Toast.LENGTH_SHORT).show();
                 }
@@ -306,6 +310,8 @@ public class CommentActivity extends AppCompatActivity {
                         String comment_id = "";
                         String user_uid = "";
                         String user_comment = "";
+                        String comment_user_name = "";
+                        String comment_user_arroba = "";
                         String user_photo_url = "";
                         ArrayList<String> liked_users_comment = new ArrayList<>();
 
@@ -317,6 +323,12 @@ public class CommentActivity extends AppCompatActivity {
                             }
                             else if (comment_data.getKey().equals("pic")) {
                                 user_photo_url = comment_data.getValue().toString();
+                            }
+                            else if (comment_data.getKey().equals("comment_user_name")) {
+                                comment_user_name = comment_data.getValue().toString();
+                            }
+                            else if (comment_data.getKey().equals("comment_user_arroba")) {
+                                comment_user_arroba = comment_data.getValue().toString();
                             }
                             else if (comment_data.getKey().equals("user_comment")) {
                                 user_uid = comment_data.getValue().toString();
@@ -330,7 +342,7 @@ public class CommentActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        list_comments.add(new CommentModel(main_post_id, comment_id, user_uid, user_comment, user_photo_url, liked_users_comment));
+                        list_comments.add(new CommentModel(main_post_id, comment_id, user_uid, comment_user_name, comment_user_arroba, user_comment, user_photo_url, liked_users_comment));
                     }
                     else {
                         number_comments = Integer.parseInt(comment.getValue().toString());

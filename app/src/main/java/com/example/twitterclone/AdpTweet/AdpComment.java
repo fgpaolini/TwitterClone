@@ -54,7 +54,7 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvComment;
+        TextView tvName, tvComment, tvUser;
         ImageView ivProfile;
         CheckBox likeButton;
 
@@ -62,6 +62,7 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             tvName = itemView.findViewById(R.id.tweet_post_name);
+            tvUser = itemView.findViewById(R.id.tweet_post_user);
             tvComment = itemView.findViewById(R.id.profileDescription);
             ivProfile = itemView.findViewById(R.id.post_profile_user);
             likeButton = itemView.findViewById(R.id.likeBtn);
@@ -69,7 +70,8 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
 
         //Pondra la informacion al objeto
         public void bindData(@NonNull CommentModel comments){
-            tvName.setText(comments.getUser_comment());
+            tvName.setText(comments.getComment_user_name());
+            tvUser.setText(comments.getComment_user_arroba());
             tvComment.setText(comments.getUser_comment());
             Uri profile_photo = Uri.parse(comments.getUser_photo_url());
             Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
