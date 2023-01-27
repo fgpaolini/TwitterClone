@@ -275,7 +275,7 @@ public class CommentActivity extends AppCompatActivity {
 
                 String comentario = etTextoCommentar.getText().toString();
                 if(comentario.isEmpty()){
-                    Toast.makeText(CommentActivity.this, "Comentario vacio...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this, getResources().getString(R.string.emptycomment), Toast.LENGTH_SHORT).show();
                     etTextoCommentar.requestFocus();
                     return;
                 }
@@ -290,7 +290,7 @@ public class CommentActivity extends AppCompatActivity {
                     ArrayList<String> nueva_lista_meGusta = new ArrayList<>();
                     list_comments.add(new CommentModel(post_id, "comment"+number_comments, LOGGED_USER.getUID(), LOGGED_USER.getName(), LOGGED_USER.getUser(), comentario, LOGGED_USER.getURL_image(), nueva_lista_meGusta));
                     etTextoCommentar.setText("");
-                    Toast.makeText(CommentActivity.this, "Comentado!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this, getResources().getString(R.string.replySent), Toast.LENGTH_SHORT).show();
                     finish();
                 }
 

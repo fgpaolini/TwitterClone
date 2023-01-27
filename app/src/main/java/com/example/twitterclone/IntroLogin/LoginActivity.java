@@ -52,12 +52,12 @@ public class LoginActivity extends AppCompatActivity {
                 String pass = etPass.getText().toString();
 
                 if(email.isEmpty()){
-                    Toast.makeText(LoginActivity.this, "No puede estar vacio el correo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.emptyEmail), Toast.LENGTH_SHORT).show();
                     etMail.requestFocus();
                     return;
                 }
                 if(pass.isEmpty()){
-                    Toast.makeText(LoginActivity.this,"No puede estar vacio la contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.emptyPass), Toast.LENGTH_SHORT).show();
                     etPass.requestFocus();
                     return;
                 }
@@ -73,13 +73,13 @@ public class LoginActivity extends AppCompatActivity {
                             i.putExtra("UIDusuario", uid);
                             startActivity(i);
 
-                            Toast.makeText(LoginActivity.this, "Bienvenido", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.welcomeToast), Toast.LENGTH_LONG).show();
 
                         } else {
-                            Toast.makeText(LoginActivity.this, "Valide su correo", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.emailVerification), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Algo a fallado en login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.loginFail), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

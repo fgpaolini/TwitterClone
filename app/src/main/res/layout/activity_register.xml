@@ -37,7 +37,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/chirp_bold"
             android:gravity="center"
-            android:text="Registrate"
+            android:text="@string/tvRegister"
             android:textColor="@color/colorWhite"
             android:textSize="25sp" />
 
@@ -49,7 +49,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/chirp_regular"
-            android:hint="Nombre"
+            android:hint="@string/etName"
             android:paddingStart="20dp" />
 
         <Space
@@ -67,7 +67,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/chirp_regular"
-            android:hint="Nombre de usuario"
+            android:hint="@string/etUsuario"
             android:paddingStart="20dp" />
 
         <Space
@@ -84,7 +84,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/chirp_regular"
-            android:hint="Correo"
+            android:hint="@string/etRegEmail"
             android:paddingStart="20dp" />
 
         <Space
@@ -101,7 +101,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/chirp_regular"
-            android:hint="Contraseña"
+            android:hint="@string/etRegPassword"
             android:inputType="textPassword"
             android:paddingStart="20dp" />
 
@@ -113,7 +113,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:fontFamily="@font/chirp_heavy"
-            android:text="Unete"
+            android:text="@string/buttonJoin"
             android:textAllCaps="false" />
 
         <LinearLayout
@@ -128,7 +128,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/chirp_medium"
-                android:text="Ya tienes cuenta?"
+                android:text="@string/tvHaveAcc"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/chirp_heavy"
-                android:text="Login"
+                android:text="@string/tvLog"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
         </LinearLayout>

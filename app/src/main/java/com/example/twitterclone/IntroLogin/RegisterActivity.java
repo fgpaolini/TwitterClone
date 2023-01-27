@@ -108,27 +108,27 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if(password.length() < 6){
-            Toast.makeText(RegisterActivity.this,"Pon al menos 6 caracteres en la contraseña", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.sixCharactersPass), Toast.LENGTH_SHORT).show();
             etPass.requestFocus();
             return;
         }
         if(name.isEmpty()){
-            Toast.makeText(RegisterActivity.this,"No puede estar vacio el nombre!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,getResources().getString(R.string.emptyName), Toast.LENGTH_SHORT).show();
             etName.requestFocus();
             return;
         }
         if(user.isEmpty()){
-            Toast.makeText(RegisterActivity.this,"No puede estar vacio el usuario!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,getResources().getString(R.string.emptyUserName), Toast.LENGTH_SHORT).show();
             etName.requestFocus();
             return;
         }
         if(mail.isEmpty()){
-            Toast.makeText(RegisterActivity.this,"No puede estar vacia el mail!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.emptyEmail), Toast.LENGTH_SHORT).show();
             etMail.requestFocus();
             return;
         }
         else if(!Patterns.EMAIL_ADDRESS.matcher(mail).matches()){
-            Toast.makeText(RegisterActivity.this, "Pon un correo valido!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.validEmail), Toast.LENGTH_SHORT).show();
             etMail.requestFocus();
             return;
         }
@@ -136,13 +136,13 @@ public class RegisterActivity extends AppCompatActivity {
         //Comprueba que no haya users y correos que existan
         for(String check_name: list_names){
             if(name.equals(check_name)){
-                Toast.makeText(RegisterActivity.this, "Nombre de usuario usado.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.UserNameTaken), Toast.LENGTH_SHORT).show();
                 return;
             }
         }
         for(String check_mail: list_mail){
             if(mail.equals(check_mail)){
-                Toast.makeText(RegisterActivity.this, "Correo usado.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.EmailTaken), Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -153,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, "Registrado. Valide su correo.", LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registeredCheckEmail), LENGTH_LONG).show();
 
                         String uid = mAuth.getCurrentUser().getUid();
                         mDatabase.child("User").child(uid).child("name").setValue(name);
@@ -171,12 +171,12 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
 
                     } else {
-                        Toast.makeText(RegisterActivity.this, "Algo ha fallado!", LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registryFailed), LENGTH_LONG).show();
                     }
                 });
 
             } else {
-                Toast.makeText(RegisterActivity.this, "Algo ha fallado!", LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.registryFailed), LENGTH_LONG).show();
             }
         });
 

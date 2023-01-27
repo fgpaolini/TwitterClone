@@ -114,10 +114,9 @@
                             android:elevation="5dp"
                             android:fontFamily="@font/chirp_light"
                             android:gravity="center"
-                            android:text="Editar perfil"
                             android:textAllCaps="false"
-                            android:textOff="Editar perfil"
-                            android:textOn="Guardar"
+                            android:textOff="@string/editProfileButton"
+                            android:textOn="@string/editProfileButtonSave"
                             android:textStyle="bold" />
 
                         <ToggleButton
@@ -237,7 +236,7 @@
                         android:clickable="true"
                         android:elevation="5dp"
                         android:fontFamily="@font/chirp_bold"
-                        android:text="Salir"
+                        android:text="@string/logOutBtn"
                         android:textColor="@android:color/holo_red_light"
                         android:textStyle="bold"
                         android:visibility="gone" />

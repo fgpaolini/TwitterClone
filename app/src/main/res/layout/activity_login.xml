@@ -45,10 +45,9 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/chirp_bold"
             android:gravity="center"
+            android:text="@string/tvLogin"
             android:textColor="@color/colorWhite"
-            android:textSize="25sp"
-            android:text="Inicia sesión"
- />
+            android:textSize="25sp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etCorreoLogin"
@@ -58,9 +57,8 @@
             android:background="@drawable/custom_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/chirp_regular"
-            android:paddingStart="20dp"
-            android:hint="Correo"
-             />
+            android:hint="@string/etEmail"
+            android:paddingStart="20dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -76,7 +74,7 @@
             android:background="@drawable/custom_edittext"
             android:elevation="5dp"
             android:fontFamily="@font/chirp_regular"
-            android:hint="Contraseña"
+            android:hint="@string/etPassword"
             android:inputType="textPassword"
             android:paddingStart="20dp" />
 
@@ -88,7 +86,7 @@
             android:layout_marginVertical="10dp"
             android:layout_weight="1"
             android:fontFamily="@font/chirp_heavy"
-            android:text="Log in"
+            android:text="@string/buttonLogin"
             android:textAllCaps="false" />
 
         <LinearLayout
@@ -104,10 +102,10 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/chirp_medium"
+                android:text="@string/tvDontHaveAcc"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp"
-                android:text="No tienes una cuenta?"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/btTextRegister"
@@ -116,9 +114,9 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/chirp_heavy"
 
+                android:text="@string/tvJoin"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp"
-                android:text="Registrate."/>
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -145,7 +145,7 @@ public class ProfileFragment extends Fragment {
 
             }
             else{
-                Toast.makeText(ProfileFragment.this.getContext(),"Cancelado...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileFragment.this.getContext(),getResources().getString(R.string.postCanceled),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -230,9 +230,9 @@ public class ProfileFragment extends Fragment {
                 Button btChange;
 
                 tvChangeTitle = v.findViewById(R.id.titleChange);
-                tvChangeTitle.setText("Cambiar Nombre");
+                tvChangeTitle.setText(getResources().getString(R.string.changeNameHint));
                 etChange = v.findViewById(R.id.etNameToChange);
-                etChange.setHint("Nombre");
+                etChange.setHint(getResources().getString(R.string.changeName));
                 btChange = v.findViewById(R.id.btChangeNameDatabase);
 
                 btChange.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +240,7 @@ public class ProfileFragment extends Fragment {
                     public void onClick(View v) {
                         String new_name = etChange.getText().toString();
                         if(new_name.isEmpty()){
-                            Toast.makeText(ProfileFragment.this.getContext(), "No puede estar el nombre vacio", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.emptyName), Toast.LENGTH_SHORT).show();
                             etChange.requestFocus();
                             return;
                         }
@@ -269,7 +269,7 @@ public class ProfileFragment extends Fragment {
                         changed_new_name = true;
                         my_tweets = new ArrayList<>();
                         fillUsersPost(v, recyclerViewPopular);
-                        Toast.makeText(ProfileFragment.this.getContext(), "Nombre cambiado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.changedName), Toast.LENGTH_SHORT).show();
                         change_name_dialog.dismiss();
                     }
                 });
@@ -310,17 +310,17 @@ public class ProfileFragment extends Fragment {
                     public void onClick(View v) {
                         String new_description = etChange.getText().toString();
                         if(new_description.isEmpty()){
-                            Toast.makeText(ProfileFragment.this.getContext(), "No puede estar la descricion vacio", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.emptyBio), Toast.LENGTH_SHORT).show();
                             etChange.requestFocus();
                             return;
                         } else if (new_description.length() >= 51) {
-                            Toast.makeText(ProfileFragment.this.getContext(), "No puede haber mas de 50 caracteres", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.fiftyBio), Toast.LENGTH_SHORT).show();
                             etChange.requestFocus();
                             return;
                         }
                         MDATABASE.child("User").child(LOGGED_USER.getUID()).child("description").setValue(new_description);
 
-                        Toast.makeText(ProfileFragment.this.getContext(), "Descripcion cambiado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.bioChanged), Toast.LENGTH_SHORT).show();
                         etDesctiption.setText(new_description);
                         change_name_dialog.dismiss();
                     }
@@ -375,10 +375,10 @@ public class ProfileFragment extends Fragment {
                         Uri imageURL = task.getResult();
                         MDATABASE.child("User").child(LOGGED_USER.getUID()).child("pic").setValue(imageURL.toString());
                     });
-                    Toast.makeText(ProfileFragment.this.getContext(), "Imagen subido exitosamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.imageUploaded), Toast.LENGTH_SHORT).show();
                 }
                 public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(ProfileFragment.this.getContext(), "Algo a salido mal...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileFragment.this.getContext(), getResources().getString(R.string.somethingWrong), Toast.LENGTH_SHORT).show();
                 }
             });
         }

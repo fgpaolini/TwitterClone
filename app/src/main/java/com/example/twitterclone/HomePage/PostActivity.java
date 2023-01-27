@@ -129,7 +129,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 else if(result.getResultCode() == RESULT_CANCELED){
-                    Toast.makeText(PostActivity.this,"Cancelado...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this,getResources().getString(R.string.postCanceled),Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -199,7 +199,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         String post_text = etPost.getText().toString();
 
         if(post_text.isEmpty()){
-            Toast.makeText(PostActivity.this, "No puedes dejar vacio el post", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PostActivity.this, getResources().getString(R.string.postEmpty), Toast.LENGTH_SHORT).show();
             etPost.requestFocus();
             return;
         }
@@ -243,7 +243,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                         if(!post_save){
                             post_save = true;
                             loading_dialog.dismiss();
-                            Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PostActivity.this, getResources().getString(R.string.postSent), Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }));
@@ -254,7 +254,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 final MediaPlayer mediaPlayer = MediaPlayer.create(PostActivity.this, R.raw.twitter_notif_sound);
                 mediaPlayer.start();
-                Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostActivity.this, getResources().getString(R.string.postSent), Toast.LENGTH_SHORT).show();
             }
 
 

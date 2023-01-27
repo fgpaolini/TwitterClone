@@ -1,10 +1,69 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TwitterClone</string>
+    <!-- Strings used for IntroActivity -->
     <string name="str_intro_text">See what\'s happening in the world right now</string>
     <string name="str_create_account">Create account</string>
     <string name="str_have_account">Have an account already?</string>
     <string name="str_log_in">Log in</string>
+    <!-- Strings used for LoginActivity -->
+    <string name="tvLogin">Log in</string>
+    <string name="etEmail">Email</string>
+    <string name="etPassword">Password</string>
+    <string name="buttonLogin">Log in</string>
+    <string name="tvDontHaveAcc">Don\'t have an account?</string>
+    <string name="tvJoin">Join</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <!-- Strings used for LoginActivity Error Messages -->
+    <string name="emptyEmail">Email field can\'t be empty</string>
+    <string name="emptyPass">Password field can\'t be empty</string>
+    <string name="emailVerification">Check your email</string>
+    <string name="loginFail">Login failed</string>
+    <!-- Strings used for RegisterActivity -->
+    <string name="tvRegister">Join</string>
+    <string name="etName">Name</string>
+    <string name="etUsuario">Username</string>
+    <string name="etRegEmail">Email</string>
+    <string name="etRegPassword">Password</string>
+    <string name="buttonJoin">Join</string>
+    <string name="tvHaveAcc">Have an account already?</string>
+    <string name="tvLog">Login</string>
+    <!-- Strings used for RegisterActivity Error Messages -->
+    <string name="sixCharactersPass">Password needs to be at least 6 characters</string>
+    <string name="emptyName">Name can\'t be empty</string>'
+    <string name="emptyUserName">Userame can\'t be empty</string>
+    <string name="validEmail">Provide a valid email</string>
+    <string name="UserNameTaken">Username is already taken.</string>
+    <string name="EmailTaken">Email is already being used.</string>
+    <string name="registeredCheckEmail">Successfully registered. Verify your email</string>
+    <string name="registryFailed">Registry failed</string>
+    <!-- Strings used for HomeActivity -->
+    <string name="welcomeToast">Welcome!</string>
+    <!-- Strings used for SearchFragment -->
+    <string name="etSearch">Search on TwitterClone</string>
+    <!-- Strings used for NotifFragment -->
+    <string name="noNotif" tools:ignore="StringEscaping">You don\'t have notifications yet.</string>
+    <!-- Strings used for ProfileFragment -->
+    <string name="editProfileButton">Edit profile</string>
+    <string name="editProfileButtonSave">Save</string>
+    <string name="changeNameHint">Change name</string>
+    <string name="changeName">Name</string>
+    <string name="changedName">Name has been changed</string>
+    <string name="emptyBio">Bio can\'t be empty</string>
+    <string name="fiftyBio">Bio can\'t be more than 50 characters</string>
+    <string name="bioChanged">Bio changed</string>
+    <string name="imageUploaded">Image uploaded</string>
+    <string name="somethingWrong">Something went wrong...</string>
+    <string name="logOutBtn">Log out</string>
+    <!-- Strings used for PostActivity -->
+    <string name="postHint">What\'s happening?</string>
+    <string name="postEmpty">Tweet can\'t be empty</string>
+    <string name="postSent">Tweet sent!</string>
+    <string name="postCanceled">Canceled...</string>
+    <!-- Strings used for CommentActivity -->
+    <string name="commentHint">Tweet your reply</string>
+    <string name="sentButton">Tweet</string>
+    <string name="emptycomment">Empty reply...</string>
+    <string name="replySent">Reply sent!</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

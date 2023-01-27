@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">TwitterClone</string>
+    <!-- Strings used for IntroActivity -->
+    <string name="str_intro_text">Entérate de lo quie está pasando en el mundo en este momento.</string>
+    <string name="str_create_account">Crear cuenta</string>
+    <string name="str_have_account">¿Ya tienes una cuenta?</string>
+    <string name="str_log_in">Inicia sesión</string>
+    <!-- Strings used for LoginActivity -->
+    <string name="tvLogin">Inicia sesión</string>
+    <string name="etEmail">Correo</string>
+    <string name="etPassword">Contraseña</string>
+    <string name="buttonLogin">Inicia sesión</string>
+    <string name="tvDontHaveAcc">No tienes una cuenta?</string>
+    <string name="tvJoin">Regístrate</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <!-- Strings used for LoginActivity Error Messages -->
+    <string name="emptyEmail">No puede estar vacío el correo</string>
+    <string name="emptyPass">No puede estar vacía la contraseña</string>
+    <string name="emailVerification">Valide su correo</string>
+    <string name="loginFail">Algo a fallado al iniciar sesión</string>
+    <!-- Strings used for RegisterActivity -->
+    <string name="tvRegister">Regístrate</string>
+    <string name="etName">Nombre</string>
+    <string name="etUsuario">Nombre de usuario</string>
+    <string name="etRegEmail">Correo</string>
+    <string name="etRegPassword">Contraseña</string>
+    <string name="buttonJoin">Únete</string>
+    <string name="tvHaveAcc">Ya tienes una cuenta?</string>
+    <string name="tvLog">Inicia sesión</string>
+    <!-- Strings used for RegisterActivity Error Messages -->
+    <string name="sixCharactersPass">Pon al menos 6 caracteres en la contraseña</string>
+    <string name="emptyName">No puede estar vacío el nombre!</string>
+    <string name="emptyUserName">No puede estar vacío el usuario!</string>
+    <string name="validEmail">Pon un correo valido!</string>
+    <string name="UserNameTaken">El nombre de usuario ya se encuentra en uso.</string>
+    <string name="EmailTaken">El correo ya se encuentra en uso.</string>
+    <string name="registeredCheckEmail">Registrado exitosamente. Compruebe su correo.</string>
+    <string name="registryFailed">Algo a fallado al registrarse.</string>
+    <!-- Strings used for HomeActivity -->
+    <string name="welcomeToast">Bienvenido!</string>
+    <!-- Strings used for SearchFragment -->
+    <string name="etSearch">Buscar en TwitterClone</string>
+    <!-- Strings used for NotifFragment -->
+    <string name="noNotif">No tienes notificaciones aún</string>
+    <!-- Strings used for ProfileFragment -->
+    <string name="editProfileButton">Editar perfil</string>
+    <string name="editProfileButtonSave">Guardar</string>
+    <string name="changeNameHint">Cambiar nombre</string>
+    <string name="changeName">Nombre</string>
+    <string name="changedName">Nombre cambiado</string>
+    <string name="emptyBio">La bio no puede estar vacía</string>
+    <string name="fiftyBio">No puede haber mas de 50 caracteres</string>
+    <string name="bioChanged">Bio cambiada</string>
+    <string name="imageUploaded">Imagen subida exitosamente</string>
+    <string name="somethingWrong">Algo ha salido mal...</string>
+    <string name="logOutBtn">Salir</string>
+    <!-- Strings used for PostActivity -->
+    <string name="postHint">¿Qué quieres publicar?</string>
+    <string name="postEmpty">El tweet no puede estar vacío...</string>
+    <string name="postSent">Tweet enviado!</string>
+    <string name="postCanceled">Cancelado...</string>
+    <!-- Strings used for CommentActivity -->
+    <string name="commentHint">Twittea tu respuesta</string>
+    <string name="sentButton">Enviar</string>
+    <string name="emptycomment">Respuesta vacía...</string>
+    <string name="replySent">Respuesta enviada!</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
