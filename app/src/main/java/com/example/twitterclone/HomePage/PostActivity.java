@@ -137,69 +137,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         btPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String post_text = etPost.getText().toString();
-
-                if(post_text.isEmpty()){
-                    Toast.makeText(PostActivity.this, "No puedes dejar vacio el post", Toast.LENGTH_SHORT).show();
-                    etPost.requestFocus();
-                    return;
-                }
-                else{
-                    //Preparar la pantalla de carga
-                    AlertDialog loading_dialog;
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PostActivity.this);
-                    builder.setCancelable(false);
-
-                    //Preparar para agregar el layout
-                    LayoutInflater inflater = getLayoutInflater();
-                    v = inflater.inflate(R.layout.resource_alertdialog_loading, null);
-
-                    //Configurando el layout en el view
-                    builder.setView(v);
-                    loading_dialog = builder.create();
-
-                    //Mostrar el layout
-                    loading_dialog.show();
-
-                    post_count++;
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("name").setValue(LOGGED_USER.getName());
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(ServerValue.TIMESTAMP);
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("retweet_users").setValue("");
-                    MDATABASE.child("Posts").child("Post"+ post_count).child("comments").child("count_comments").setValue(0);
-                    MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));
-                    int number_image = 0;
-                    if(used_uri.size() != 0){
-                        for(Uri data_image: used_uri){
-                            number_image++;
-                            String number_string_image =  Integer.toString(number_image);
-                            StorageReference ubicationImagen = MTSTORAGE.child("Posts").child("Post"+Integer.toString(post_count)).child("Image"+number_string_image+".png");
-                            ubicationImagen.putFile(data_image).addOnSuccessListener(taskSnapshot -> ubicationImagen.getDownloadUrl().addOnCompleteListener(task2 -> {
-                                Uri imageURL = task2.getResult();
-                                MDATABASE.child("Posts").child("Post"+Integer.toString(post_count)).child("Image"+number_string_image).setValue(imageURL.toString());
-                                if(!post_save){
-                                    post_save = true;
-                                    loading_dialog.dismiss();
-                                    Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            }));
-                        }
-                    }
-                    else{
-                        loading_dialog.dismiss();
-                        finish();
-                        final MediaPlayer mediaPlayer = MediaPlayer.create(PostActivity.this, R.raw.twitter_notif_sound);
-                        mediaPlayer.start();
-                        Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
-                    }
-
-
-                }
+                checkCountPosts(v);
             }
         });
 
@@ -231,6 +169,95 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
     public void checkPositionIsUsed(int position){
         if(position_used[position] == true){
             used_uri.remove(position);
+        }
+    }
+
+    public void checkCountPosts(@NonNull View v){
+        MDATABASE.child("Posts").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot data : snapshot.getChildren()){
+                    if(data.getKey().equals("postCount")){
+                        int check_post_count = Integer.parseInt(data.getValue().toString());
+                        while(check_post_count == post_count){
+                            post_count++;
+                        }
+                        postTweet(v);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void postTweet(@NonNull View v){
+        String post_text = etPost.getText().toString();
+
+        if(post_text.isEmpty()){
+            Toast.makeText(PostActivity.this, "No puedes dejar vacio el post", Toast.LENGTH_SHORT).show();
+            etPost.requestFocus();
+            return;
+        }
+        else{
+            //Preparar la pantalla de carga
+            AlertDialog loading_dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(PostActivity.this);
+            builder.setCancelable(false);
+
+            //Preparar para agregar el layout
+            LayoutInflater inflater = getLayoutInflater();
+            v = inflater.inflate(R.layout.resource_alertdialog_loading, null);
+
+            //Configurando el layout en el view
+            builder.setView(v);
+            loading_dialog = builder.create();
+
+            //Mostrar el layout
+            loading_dialog.show();
+
+            post_count++;
+            MDATABASE.child("Posts").child("Post"+ post_count).child("UID").setValue(USER_UID);
+            MDATABASE.child("Posts").child("Post"+ post_count).child("name").setValue(LOGGED_USER.getName());
+            MDATABASE.child("Posts").child("Post"+ post_count).child("User").setValue(LOGGED_USER.getUser());
+            MDATABASE.child("Posts").child("Post"+ post_count).child("textPost").setValue(post_text);
+            MDATABASE.child("Posts").child("Post"+ post_count).child("postTime").setValue(ServerValue.TIMESTAMP);
+            MDATABASE.child("Posts").child("Post"+ post_count).child("pic").setValue(LOGGED_USER.getURL_image());
+            MDATABASE.child("Posts").child("Post"+ post_count).child("liked_users").setValue("");
+            MDATABASE.child("Posts").child("Post"+ post_count).child("retweet_users").setValue("");
+            MDATABASE.child("Posts").child("Post"+ post_count).child("comments").child("count_comments").setValue(0);
+            MDATABASE.child("Posts").child("postCount").setValue(Integer.toString(post_count));
+            int number_image = 0;
+            if(used_uri.size() != 0){
+                for(Uri data_image: used_uri){
+                    number_image++;
+                    String number_string_image =  Integer.toString(number_image);
+                    StorageReference ubicationImagen = MTSTORAGE.child("Posts").child("Post"+Integer.toString(post_count)).child("Image"+number_string_image+".png");
+                    ubicationImagen.putFile(data_image).addOnSuccessListener(taskSnapshot -> ubicationImagen.getDownloadUrl().addOnCompleteListener(task2 -> {
+                        Uri imageURL = task2.getResult();
+                        MDATABASE.child("Posts").child("Post"+Integer.toString(post_count)).child("Image"+number_string_image).setValue(imageURL.toString());
+                        if(!post_save){
+                            post_save = true;
+                            loading_dialog.dismiss();
+                            Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }));
+                }
+            }
+            else{
+                loading_dialog.dismiss();
+                finish();
+                final MediaPlayer mediaPlayer = MediaPlayer.create(PostActivity.this, R.raw.twitter_notif_sound);
+                mediaPlayer.start();
+                Toast.makeText(PostActivity.this, "Posteado!", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 }

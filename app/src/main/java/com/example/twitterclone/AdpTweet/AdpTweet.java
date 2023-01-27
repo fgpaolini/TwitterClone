@@ -153,6 +153,16 @@ public class AdpTweet extends RecyclerView.Adapter<AdpTweet.ViewHolder> {
                 tvRetweeted.setText(Integer.toString(tweet.getUsers_retweet().size()));
             }
 
+            if(tweet.getUser_uid().equals("aDuwD6lDDYM2Fl0Z6YUy3AliVZw2")){
+                verifiedCheck.setVisibility(View.VISIBLE);
+            }
+            else if(tweet.getUser_uid().equals("jgPTFOeHctTydx2Xhr4Z8ZM04GG3")){
+                verifiedCheck.setVisibility(View.VISIBLE);
+            }
+            else{
+                verifiedCheck.setVisibility(View.GONE);
+            }
+
             //Acciones en caso de ser clicado el like
             likeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
