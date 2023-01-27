@@ -113,9 +113,9 @@ public class ActivityUserInfo extends AppCompatActivity {
                 }
                 Uri profile_photo = Uri.parse(user.getURL_image());
                 Glide.with(ActivityUserInfo.this).load(String.valueOf(profile_photo)).into(ivPhotoUser);
-                etName.setText("Nombre: " + user.getName());
-                etUser.setText("Usuario: " + user.getUser());
-                etDesctiption.setText("Descripcion: " + user.getUser_description());
+                etName.setText(user.getName());
+                etUser.setText("@" + user.getUser());
+                etDesctiption.setText("Bio: " + user.getUser_description());
 
                 fillRetweetPost();
             }

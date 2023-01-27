@@ -16,6 +16,11 @@
         android:background="@color/white"
         android:orientation="vertical">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#9FAAACAD" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -127,92 +132,151 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="16dp"
                 android:layout_marginLeft="55dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <ImageView
-                    android:id="@+id/commentBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/twitter_reply_outline" />
-
-                <TextView
-                    android:id="@+id/textCountComments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="1"
-                    android:textSize="15dp"
-                    android:visibility="gone"></TextView>
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <CheckBox
-                        android:id="@+id/rtBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:button="@drawable/retweet_checkbox"
-                        android:elegantTextHeight="true"
-                        android:gravity="left|center_vertical"
-                        android:textAlignment="gravity"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvAmmountRetweet"
-                        android:layout_width="60dp"
-                        android:layout_height="match_parent"
-                        android:elegantTextHeight="false"
-                        android:gravity="left"
-                        android:text="1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/commentLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <CheckBox
-                        android:id="@+id/likeBtn"
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:button="@drawable/like_checkbox"
-                        android:elegantTextHeight="false"
-                        android:gravity="left|center_vertical"
-                        android:textAlignment="gravity"
-                        android:textSize="12sp" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/tvAmmountLiked"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/commentBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_twitter_reply_outline" />
+
+                        <TextView
+                            android:id="@+id/textCountComments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="1"
+                            android:elegantTextHeight="false"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="1"
+                            android:textSize="14sp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/commentBtn"
+                            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rtLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:elegantTextHeight="false"
-                        android:gravity="left"
-                        android:text="1" />
+                        android:layout_gravity="center"
+                        android:layout_weight="1">
+
+                        <CheckBox
+                            android:id="@+id/rtBtn"
+                            style="@style/rtButtonStyle"
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
+                            android:elegantTextHeight="true"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAmmountRetweet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="1"
+                            android:elegantTextHeight="false"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="1"
+                            android:textSize="14sp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toEndOf="@+id/rtBtn" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/likeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <CheckBox
+                            android:id="@+id/likeBtn"
+                            style="@style/likeButtonStyle"
+                            android:layout_width="16dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:button="@android:color/transparent"
+                            android:elegantTextHeight="false"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAmmountLiked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_weight="1"
+                            android:elegantTextHeight="false"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toEndOf="@+id/likeBtn" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/GreyEditText" />
 
 
     </LinearLayout>

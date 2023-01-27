@@ -54,7 +54,7 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvName, tvComment, tvUser;
+        TextView tvName, tvComment, tvUser, tvAmmountLiked;
         ImageView ivProfile;
         CheckBox likeButton;
 
@@ -66,12 +66,13 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
             tvComment = itemView.findViewById(R.id.profileDescription);
             ivProfile = itemView.findViewById(R.id.post_profile_user);
             likeButton = itemView.findViewById(R.id.likeBtn);
+            tvAmmountLiked = itemView.findViewById(R.id.tvAmmountLiked);
         }
 
         //Pondra la informacion al objeto
         public void bindData(@NonNull CommentModel comments){
             tvName.setText(comments.getComment_user_name());
-            tvUser.setText(comments.getComment_user_arroba());
+            tvUser.setText("@" + comments.getComment_user_arroba());
             tvComment.setText(comments.getUser_comment());
             Uri profile_photo = Uri.parse(comments.getUser_photo_url());
             Glide.with(itemView).load(String.valueOf(profile_photo)).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(ivProfile);
@@ -116,9 +117,9 @@ public class AdpComment extends RecyclerView.Adapter<AdpComment.ViewHolder> {
                         MDATABASE.child("Posts").child(comments.getMain_post_id()).child("comments").child(comments.getComment_id()).child("liked_users").child(LOGGED_USER.getUID()).setValue(true);
                     }
                     if(comments.getLiked_users_comment().size() == 0){
-                        likeButton.setText("");
+                        tvAmmountLiked.setText("");
                     } else{
-                        likeButton.setText(Integer.toString(comments.getLiked_users_comment().size()));
+                        tvAmmountLiked.setText(Integer.toString(comments.getLiked_users_comment().size()));
                     }
                 }
             });

@@ -103,9 +103,9 @@ public class ProfileFragment extends Fragment {
 
         Uri profile_photo = Uri.parse(LOGGED_USER.getURL_image());
         Glide.with(ProfileFragment.this).load(String.valueOf(profile_photo)).into(ivPhotoUser);
-        etName.setText("Nombre: " + LOGGED_USER.getName());
-        etUser.setText("Usuario: " + LOGGED_USER.getUser());
-        etDesctiption.setText("Descripcion: " + LOGGED_USER.getUser_description());
+        etName.setText(LOGGED_USER.getName());
+        etUser.setText("@" + LOGGED_USER.getUser());
+        etDesctiption.setText("Bio" + LOGGED_USER.getUser_description());
 
         //Necesario para busqueda de imagenes
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {

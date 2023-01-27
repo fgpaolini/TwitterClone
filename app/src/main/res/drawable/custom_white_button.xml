@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/button_white_darker"
+    <item android:drawable="@drawable/custom_edittext"
         android:state_pressed="true" />
+
+    <item android:drawable="@drawable/button_white_darker"
+        android:state_checked="true" />
 
     <item android:drawable="@color/colorBlack"
         android:state_enabled="false" />
